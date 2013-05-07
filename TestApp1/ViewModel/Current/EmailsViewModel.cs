@@ -15,25 +15,29 @@ namespace TestApp1.ViewModel {
    public class EmailsViewModel : ViewModelBase {
 
       private static IRepository<Person> repo;
-      private Person current;
 
       public ICollectionView ColView { get; set; }
+      public ObservableCollection<Person> All { get; set; }
 
-      // ????????????????????????
-      // Comment gérer les collections ???
+      public Person Current {
+         get {
+            return ColView.CurrentItem as Person;
+         }
+      }
 
-      // public ObservableCollection<EmailsViewModel> All { get; set; } 
+      public string Fullname { get { return Current.Firstname + " " + Current.Lastname; } }
 
       public string EmailsStr {
          get {
-            return string.Join(", ", (ColView.CurrentItem as Person).Emails.Select(e => e.Email1));
+            return string.Join(", ", Current.Emails.Select(e => e.Email1));
          }
       }
 
       public EmailsViewModel(IRepository<Person> rep) {
          repo = rep;
-         //All = new ObservableCollection<EmailsViewModel>();
-         ColView = CollectionViewSource.GetDefaultView(repo.GetAll());
+         All = new ObservableCollection<Person>(repo.GetAll());
+         ColView = CollectionViewSource.GetDefaultView(All);
+         var i = 0;
       }
 
    }
