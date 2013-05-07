@@ -19,16 +19,13 @@ namespace TestApp1.ViewModel {
       public ICollectionView ColView { get; set; }
       public ObservableCollection<Person> All { get; set; }
 
-
-      //public ObservableCollection<EmailsViewModel> AllVMs { get; set; }
-
-      public Person Current {
+      public EmailsViewModel Current {
          get {
-            return ColView.CurrentItem as Person;
+            return ColView.CurrentItem as EmailsViewModel;
          }
       }
 
-      public string Fullname { get { return Current.Firstname + " " + Current.Lastname; } }
+      // public string Fullname { get { return Current.person.Firstname + " " + Current.person.Lastname; } }
 
       /*
       public string EmailsStr {
@@ -43,18 +40,18 @@ namespace TestApp1.ViewModel {
 
          All = new ObservableCollection<Person>(repo.GetAll());
 
-         //AllVMs = new ObservableCollection<EmailsViewModel>();
-        
+
+
          ColView = CollectionViewSource.GetDefaultView(All);
          ColView.CurrentChanged += ColView_CurrentChanged;
       }
 
-      void ColView_CurrentChanged(object sender, System.EventArgs e) {
-         PersistData();
-      }
-
       public override void PersistData() {
          repo.Persist();
+      }
+
+      void ColView_CurrentChanged(object sender, System.EventArgs e) {
+         PersistData();
       }
    }
 }
