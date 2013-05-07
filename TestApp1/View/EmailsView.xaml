@@ -9,11 +9,11 @@
     <DockPanel Background="White">
         <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="10,10" FontSize="12pt">Emails View (PoC)</TextBlock>
 
-        <ListBox DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="200" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding ColView}">
+        <ListBox DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="200" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding All}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="{Binding Path=Firstname}" />
+                        <TextBlock Text="{Binding Path=Lastname}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -22,11 +22,11 @@
         <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="10,0">
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock HorizontalAlignment="Left" FontSize="10pt" Text="Nom: " />
-                <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="20" Text="{Binding ColView/Lastname, Mode=TwoWay}" />
+                <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="20" Text="{Binding ColView/Lastname}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock DockPanel.Dock="Left" HorizontalAlignment="Left" FontSize="10pt" Text="Prénom: " />
-                <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="20" Text="{Binding ColView/Firstname, Mode=TwoWay}" />
+                <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="20" Text="{Binding ColView/Firstname}" />
             </StackPanel>
         </StackPanel>
     </DockPanel>

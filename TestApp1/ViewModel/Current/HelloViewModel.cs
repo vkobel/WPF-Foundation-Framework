@@ -10,7 +10,7 @@ namespace TestApp1.ViewModel {
 
    [Navig("Ressources Humaines", "Employés")]
    [Navig("Ressources Humaines", "Employés détails")]
-   public class HelloViewModel : ViewModelBase {
+   public class HelloViewModel : CustomViewModelBase {
 
       public string Name { get; set; }
 
@@ -18,5 +18,9 @@ namespace TestApp1.ViewModel {
          Name = "Hello";
       }
 
+
+      public override void PersistData() {
+         // Nothing to do
+      }
    }
 }

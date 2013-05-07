@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Data.Objects;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Data.GenericRepo {
 
@@ -54,6 +56,7 @@ namespace Data.GenericRepo {
       }
 
       public int Persist() {
+         //Task.Factory.StartNew(() => ctx.SaveChanges());
          return ctx.SaveChanges();
       }
 

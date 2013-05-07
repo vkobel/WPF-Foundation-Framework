@@ -8,8 +8,8 @@ namespace TestApp1.Ninject.Modules {
       public override void Load() {
 
          // Register all ViewModels
-         Bind<ViewModelBase>().To<HelloViewModel>().InSingletonScope();
-         Bind<ViewModelBase>().To<EmailsViewModel>().InSingletonScope();
+         Bind<CustomViewModelBase>().To<HelloViewModel>().InSingletonScope();
+         Bind<CustomViewModelBase>().To<EmailsViewModel>().InSingletonScope();
 
       }
    }

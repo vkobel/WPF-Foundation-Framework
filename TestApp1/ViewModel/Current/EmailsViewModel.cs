@@ -12,12 +12,15 @@ namespace TestApp1.ViewModel {
 
    [Navig("Timesheet", "Agenda")]
    [Navig("Ressources Humaines", "Super")]
-   public class EmailsViewModel : ViewModelBase {
+   public class EmailsViewModel : CustomViewModelBase {
 
       private static IRepository<Person> repo;
 
       public ICollectionView ColView { get; set; }
       public ObservableCollection<Person> All { get; set; }
+
+
+      //public ObservableCollection<EmailsViewModel> AllVMs { get; set; }
 
       public Person Current {
          get {
@@ -27,18 +30,31 @@ namespace TestApp1.ViewModel {
 
       public string Fullname { get { return Current.Firstname + " " + Current.Lastname; } }
 
+      /*
       public string EmailsStr {
          get {
             return string.Join(", ", Current.Emails.Select(e => e.Email1));
          }
       }
+      */
 
       public EmailsViewModel(IRepository<Person> rep) {
          repo = rep;
+
          All = new ObservableCollection<Person>(repo.GetAll());
+
+         //AllVMs = new ObservableCollection<EmailsViewModel>();
+        
          ColView = CollectionViewSource.GetDefaultView(All);
-         var i = 0;
+         ColView.CurrentChanged += ColView_CurrentChanged;
       }
 
+      void ColView_CurrentChanged(object sender, System.EventArgs e) {
+         PersistData();
+      }
+
+      public override void PersistData() {
+         repo.Persist();
+      }
    }
 }

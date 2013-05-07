@@ -86,6 +86,7 @@
     <Compile Include="ViewModel\Current\EmailsViewModel.cs" />
     <Compile Include="ViewModel\Current\HelloViewModel.cs" />
     <Compile Include="ViewModel\ApplicationViewModel.cs" />
+    <Compile Include="ViewModel\CustomViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\EmailsView.xaml.cs">
       <DependentUpon>EmailsView.xaml</DependentUpon>
