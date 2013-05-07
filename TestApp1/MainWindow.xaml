@@ -1,0 +1,53 @@
+﻿<Window x:Class="TestApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:TestApp1.ViewModel"
+        xmlns:v="clr-namespace:TestApp1.View"
+        Title="MainWindow" Height="499" Width="713"
+        Name="MainWindowApp"
+        DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:HelloViewModel}">
+            <v:HelloView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:EmailsViewModel}">
+            <v:EmailsView />
+        </DataTemplate>
+    </Window.Resources>
+
+    <DockPanel LastChildFill="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        
+        <Border DockPanel.Dock="Top" BorderBrush="#AAAAAA" BorderThickness="0,0,0,2" Height="70">
+            <ItemsControl ItemsSource="{Binding MainNavig}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Width="200" 
+                                Content="{Binding Name}"
+                                Command="{Binding DataContext.ChangeMainCmd, ElementName=MainWindowApp}"
+                                CommandParameter="{Binding}"
+                                Margin="2,5" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>
+
+        <Border DockPanel.Dock="Left" BorderBrush="#AAAAAA" BorderThickness="0,0,2,0" Width="100">
+            <ItemsControl ItemsSource="{Binding SubNavig}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Width="70" 
+                                Content="{Binding Name}"
+                                Command="{Binding DataContext.ChangeViewCmd, ElementName=MainWindowApp}"
+                                CommandParameter="{Binding VM}"
+                                Margin="2,5" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>
+
+        <ContentControl Content="{Binding CurrentViewModel}" Background="Green" />
+        
+    </DockPanel>
+</Window>
+    
