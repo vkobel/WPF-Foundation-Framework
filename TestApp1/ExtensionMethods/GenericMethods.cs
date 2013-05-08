@@ -14,6 +14,8 @@ namespace TestApp1.ExtensionMethods {
       public static U GetPropValue<T, U>(this T obj, string name) where U : class {
          return typeof(T).GetProperty(name).GetValue(obj) as U;
       }
-   
+      
+      // Implement Generic setters !!!!!!!!!
+
    }
 }

@@ -25,7 +25,6 @@ namespace TestApp1.ViewModel {
          set {
             if(currentViewModel != value) {
                currentViewModel = value;
-               //currentViewModel.PersistData();
                RaisePropertyChanged("CurrentViewModel");
             }
          }

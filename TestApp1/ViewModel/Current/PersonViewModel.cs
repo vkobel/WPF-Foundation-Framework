@@ -18,7 +18,8 @@ namespace TestApp1.ViewModel {
       }
    }
 
-   [Navig("Ressources Humaines", "Super")]
+   [Navig("Cool", "Super")]
+   [Navig("Ressources Humaines", "Toto")]
    class PersonRepoViewModel : ViewModelBase {
 
       public ICollectionView ColView { get; set; }

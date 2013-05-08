@@ -23,6 +23,9 @@ namespace TestApp1.ViewModel {
 
       public override bool TryGetMember(GetMemberBinder binder, out object result) {
          result = Rep.GetPropValue(binder.Name);
+         
+         /// if result is null, check for self props (implement a dictionnary !)
+
          //result = result ?? 
          return result != null;
       }
