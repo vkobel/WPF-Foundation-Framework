@@ -10,9 +10,7 @@ using TestApp1.Navigation;
 
 namespace TestApp1.ViewModel {
 
-   [Navig("Timesheet", "Agenda")]
-   [Navig("Ressources Humaines", "Super")]
-   public class EmailsViewModel : CustomViewModelBase {
+   public class EmailsViewModel : ViewModelBase {
 
       private static IRepository<Person> repo;
 
@@ -25,33 +23,15 @@ namespace TestApp1.ViewModel {
          }
       }
 
-      // public string Fullname { get { return Current.person.Firstname + " " + Current.person.Lastname; } }
-
-      /*
-      public string EmailsStr {
-         get {
-            return string.Join(", ", Current.Emails.Select(e => e.Email1));
-         }
-      }
-      */
-
       public EmailsViewModel(IRepository<Person> rep) {
          repo = rep;
 
+         // Revoir méthode de loading (lazy)
+
          All = new ObservableCollection<Person>(repo.GetAll());
 
-
-
          ColView = CollectionViewSource.GetDefaultView(All);
-         ColView.CurrentChanged += ColView_CurrentChanged;
       }
 
-      public override void PersistData() {
-         repo.Persist();
-      }
-
-      void ColView_CurrentChanged(object sender, System.EventArgs e) {
-         PersistData();
-      }
    }
 }

@@ -13,7 +13,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="{Binding Path=Fullname}" />
+                        <TextBlock Text="{Binding Path=BindingData.Firstname}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -22,11 +22,11 @@
         <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="10,0">
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock HorizontalAlignment="Left" FontSize="10pt" Text="Nom: " />
-                <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="20" Text="{Binding ColView/Lastname}" />
+                <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="20" Text="{Binding ColView/BindingData.Lastname}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock DockPanel.Dock="Left" HorizontalAlignment="Left" FontSize="10pt" Text="Prénom: " />
-                <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="20" Text="{Binding ColView/Firstname}" />
+                <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="20" Text="{Binding ColView/BindingData.Firstname}" />
             </StackPanel>
         </StackPanel>
     </DockPanel>

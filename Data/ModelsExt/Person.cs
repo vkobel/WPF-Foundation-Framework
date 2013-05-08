@@ -8,7 +8,7 @@ namespace Data {
 
    public partial class Person {
 
-      public string Fullname { get { return Firstname + " " + Lastname; } }
+      // public string Fullname { get { return Firstname + " " + Lastname; } }
 
    }
 }

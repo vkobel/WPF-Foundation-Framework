@@ -10,17 +10,13 @@ namespace TestApp1.ViewModel {
 
    [Navig("Ressources Humaines", "Employés")]
    [Navig("Ressources Humaines", "Employés détails")]
-   public class HelloViewModel : CustomViewModelBase {
+   public class HelloViewModel : ViewModelBase {
 
       public string Name { get; set; }
 
       public HelloViewModel() {
-         Name = "Hello";
+         Name = "Hello World of Employés";
       }
 
-
-      public override void PersistData() {
-         // Nothing to do
-      }
    }
 }

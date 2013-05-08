@@ -75,6 +75,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ExtensionMethods\GenericMethods.cs" />
     <Compile Include="Navigation\Config\RessourcesHumaines.cs" />
     <Compile Include="Navigation\Config\Timesheet.cs" />
     <Compile Include="Navigation\NavigConfig.cs" />
@@ -86,7 +87,9 @@
     <Compile Include="ViewModel\Current\EmailsViewModel.cs" />
     <Compile Include="ViewModel\Current\HelloViewModel.cs" />
     <Compile Include="ViewModel\ApplicationViewModel.cs" />
-    <Compile Include="ViewModel\CustomViewModelBase.cs" />
+    <Compile Include="ViewModel\Current\PersonViewModel.cs" />
+    <Compile Include="ViewModel\DynamicBinderProxy.cs" />
+    <Compile Include="ViewModel\DynamicViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\EmailsView.xaml.cs">
       <DependentUpon>EmailsView.xaml</DependentUpon>

@@ -14,18 +14,18 @@ namespace TestApp1.ViewModel {
       private ICommand changeViewCmd;
       private ICommand changeMainCmd;
 
-      private CustomViewModelBase currentViewModel;
+      private ViewModelBase currentViewModel;
       private NavigConfig currentMainNav;
 
       private List<NavigConfig> navStructure;
 
       // Currently selected ViewModel
-      public CustomViewModelBase CurrentViewModel {
+      public ViewModelBase CurrentViewModel {
          get { return currentViewModel; }
          set {
             if(currentViewModel != value) {
                currentViewModel = value;
-               currentViewModel.PersistData();
+               //currentViewModel.PersistData();
                RaisePropertyChanged("CurrentViewModel");
             }
          }
@@ -68,7 +68,7 @@ namespace TestApp1.ViewModel {
       }
 
       // ctor: injection of all registred viewmodels (in MainViewModelsModule.cs)
-      public ApplicationViewModel(CustomViewModelBase[] mainViewModels) {
+      public ApplicationViewModel(ViewModelBase[] mainViewModels) {
 
          // Load navigation informations
          NavigConfigLoader.RegisterConfigurations(new RH(), new Emp(), new EmpDetails(),
@@ -119,7 +119,7 @@ namespace TestApp1.ViewModel {
       public ICommand ChangeViewCmd {
          get {
             if(changeViewCmd == null)
-               changeViewCmd = new RelayCommand<CustomViewModelBase>(vm => CurrentViewModel = vm);
+               changeViewCmd = new RelayCommand<ViewModelBase>(vm => CurrentViewModel = vm);
             return changeViewCmd;
          }
       }

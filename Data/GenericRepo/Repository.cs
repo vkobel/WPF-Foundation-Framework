@@ -5,9 +5,11 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Dynamic;
 
 namespace Data.GenericRepo {
-
    /// <summary>
    /// Build a repository for a specified POCO class and a DbContext
    /// </summary>
@@ -23,6 +25,7 @@ namespace Data.GenericRepo {
 
       public Repository(DbContext ctx) {
          this.ctx = ctx;
+         
          entities = ctx.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public)
                                  .Single(p => p.PropertyType == typeof(DbSet<T>))
                                  .GetValue(ctx) as DbSet<T>;

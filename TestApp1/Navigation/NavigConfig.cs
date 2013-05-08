@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using GalaSoft.MvvmLight;
+using System.Collections.Generic;
 using TestApp1.ViewModel;
 
 namespace TestApp1.Navigation {
@@ -11,7 +12,7 @@ namespace TestApp1.Navigation {
       public string ImgPath { get; set; }
       
       public List<NavigConfig> SubConfig { get; set; }
-      public CustomViewModelBase VM { get; set; }
+      public ViewModelBase VM { get; set; }
 
       public NavigConfig(string name, int pos = 9999, bool enabled = true, string desc = "", string imgPath = "") {
          Name = name;
