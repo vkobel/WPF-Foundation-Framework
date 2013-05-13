@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Dynamic;
+using System.Threading;
 
 namespace Data.GenericRepo {
    /// <summary>
@@ -59,8 +60,14 @@ namespace Data.GenericRepo {
       }
 
       public int Persist() {
-         //Task.Factory.StartNew(() => ctx.SaveChanges());
          return ctx.SaveChanges();
+      }
+
+      public Task<int> AsyncPersist() {
+         
+         // TODO: set a timeout, what if the user closes the app while saving ?
+
+         return Task.Factory.StartNew<int>(() => Persist(), TaskCreationOptions.PreferFairness);
       }
 
       #endregion

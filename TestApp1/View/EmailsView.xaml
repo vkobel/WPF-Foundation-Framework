@@ -9,11 +9,11 @@
     <DockPanel Background="White">
         <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="10,10" FontSize="12pt">Emails View (PoC)</TextBlock>
 
-        <ListBox DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="200" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding All}">
+        <ListBox DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="200" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding ColView}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="{Binding Path=BindingData.Firstname}" />
+                        <TextBlock Text="{Binding Path=BindingData.Fullname}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

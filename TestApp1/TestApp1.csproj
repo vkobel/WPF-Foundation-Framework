@@ -87,8 +87,9 @@
     <Compile Include="ViewModel\Current\HelloViewModel.cs" />
     <Compile Include="ViewModel\ApplicationViewModel.cs" />
     <Compile Include="ViewModel\Current\PersonViewModel.cs" />
-    <Compile Include="ViewModel\DynamicBinderProxy.cs" />
+    <Compile Include="ViewModel\DynamicProxy.cs" />
     <Compile Include="ViewModel\DynamicViewModel.cs" />
+    <Compile Include="ViewModel\StorageViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\EmailsView.xaml.cs">
       <DependentUpon>EmailsView.xaml</DependentUpon>

@@ -11,7 +11,7 @@
         <DataTemplate DataType="{x:Type vm:HelloViewModel}">
             <v:HelloView />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:PersonRepoViewModel}">
+        <DataTemplate DataType="{x:Type vm:PersonsViewModel}">
             <v:EmailsView />
         </DataTemplate>
     </Window.Resources>

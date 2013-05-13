@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Data.GenericRepo {
 
@@ -17,6 +18,7 @@ namespace Data.GenericRepo {
       void Add(T entity);
       void Delete(T entity);
       int Persist();
+      Task<int> AsyncPersist();
 
    }
 }

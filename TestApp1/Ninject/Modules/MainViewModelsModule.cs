@@ -9,7 +9,7 @@ namespace TestApp1.Ninject.Modules {
 
          // Register all ViewModels
          Bind<ViewModelBase>().To<HelloViewModel>().InSingletonScope();
-         Bind<ViewModelBase>().To<PersonRepoViewModel>().InSingletonScope();
+         Bind<ViewModelBase>().To<PersonsViewModel>().InSingletonScope();
       }
    }
 }

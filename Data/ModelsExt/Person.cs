@@ -8,6 +8,8 @@ namespace Data {
 
    public partial class Person {
 
+      // Test here to add some properties !!!
+
       // public string Fullname { get { return Firstname + " " + Lastname; } }
 
    }
