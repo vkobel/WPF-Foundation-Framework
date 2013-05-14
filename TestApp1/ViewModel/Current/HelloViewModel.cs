@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TestApp1.Navigation;
+using KobiWPFFramework.Navigation;
 
-namespace TestApp1.ViewModel {
+namespace KobiWPFFramework.ViewModel {
 
    [Navig("Ressources Humaines", "Employés")]
    [Navig("Ressources Humaines", "Employés détails")]

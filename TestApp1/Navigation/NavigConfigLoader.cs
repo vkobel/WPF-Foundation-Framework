@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestApp1.Navigation {
+namespace KobiWPFFramework.Navigation {
    public static class NavigConfigLoader {
 
       private static Dictionary<string, NavigConfig> registredConfigs = new Dictionary<string, NavigConfig>();

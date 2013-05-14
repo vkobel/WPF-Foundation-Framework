@@ -1,5 +1,5 @@
 ﻿
-namespace TestApp1.Navigation.Config {
+namespace KobiWPFFramework.Navigation.Config {
    class TS : NavigConfig {
       public TS() : base("Timesheet", 1, true, "Le timesheet", "") { }
    }

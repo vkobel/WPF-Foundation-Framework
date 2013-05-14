@@ -1,16 +1,16 @@
-﻿using Data;
-using Data.GenericRepo;
+﻿using KobiDataFramework;
+using KobiDataFramework.GenericRepo;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
-using TestApp1.Navigation;
-using TestApp1.Ninject;
+using KobiWPFFramework.Navigation;
+using KobiWPFFramework.Ninject;
 
-namespace TestApp1.ViewModel {
+namespace KobiWPFFramework.ViewModel {
    class PersonViewModel : DynamicViewModel<Person> {
-
+      
       public string Fullname { get { return BindingData.Firstname + " " + BindingData.Lastname; } }
 
       public PersonViewModel(Person p) : base(p) {
@@ -20,7 +20,7 @@ namespace TestApp1.ViewModel {
    }
 
    [Navig("Ressources Humaines", "Persons")]
-   class PersonsViewModel : StorageViewModel<Person, PersonViewModel> {
+   class PersonsViewModel : ViewModelCollection<Person, PersonViewModel> {
    }
 
 }

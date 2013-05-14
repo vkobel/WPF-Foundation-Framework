@@ -1,20 +1,15 @@
-﻿using Data.GenericRepo;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Dynamic;
-using System.Threading;
-using System.Windows;
 using System.Linq;
-using TestApp1.ExtensionMethods;
+using KobiWPFFramework.ExtensionMethods;
 
-namespace TestApp1.ViewModel {
+namespace KobiWPFFramework.ViewModel {
 
    using PropDep = List<Tuple<string, string>>;
 
    class DynamicProxy<T> : DynamicObject, INotifyPropertyChanged where T: class {
-
-      private T Model { get; set; }
 
       private List<object> proxiedObjs;
       private PropDep propDependencies;

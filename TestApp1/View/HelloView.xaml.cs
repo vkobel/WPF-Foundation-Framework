@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TestApp1.View {
+namespace KobiWPFFramework.View {
    /// <summary>
    /// Interaction logic for HelloView.xaml
    /// </summary>

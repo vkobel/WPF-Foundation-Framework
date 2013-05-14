@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Data
+namespace KobiDataFramework
 {
     using System;
     using System.Data.Entity;
@@ -26,6 +26,6 @@ namespace Data
         }
     
         public DbSet<Email> Emails { get; set; }
-        public DbSet<Person> Persons { get; set; }
+        public DbSet<Person> People { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TestApp1.Navigation {
+namespace KobiWPFFramework.Navigation {
 
    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
    public class NavigAttribute : Attribute {

@@ -1,8 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 using Ninject.Modules;
-using TestApp1.ViewModel;
+using KobiWPFFramework.ViewModel;
 
-namespace TestApp1.Ninject.Modules {
+namespace KobiWPFFramework.Ninject.Modules {
    class MainViewModelsModule : NinjectModule {
 
       public override void Load() {

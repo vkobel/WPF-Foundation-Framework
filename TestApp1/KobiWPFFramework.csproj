@@ -7,8 +7,8 @@
     <ProjectGuid>{502663D2-1467-43EE-88D2-5703454AD377}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TestApp1</RootNamespace>
-    <AssemblyName>TestApp1</AssemblyName>
+    <RootNamespace>KobiWPFFramework</RootNamespace>
+    <AssemblyName>KobiWPFFramework</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -89,7 +89,7 @@
     <Compile Include="ViewModel\Current\PersonViewModel.cs" />
     <Compile Include="ViewModel\DynamicProxy.cs" />
     <Compile Include="ViewModel\DynamicViewModel.cs" />
-    <Compile Include="ViewModel\StorageViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelCollection.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\EmailsView.xaml.cs">
       <DependentUpon>EmailsView.xaml</DependentUpon>
@@ -147,9 +147,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data\Data.csproj">
+    <ProjectReference Include="..\Data\KobiDataFramework.csproj">
       <Project>{d710363d-c265-485d-a4ec-ae8c2919d998}</Project>
-      <Name>Data</Name>
+      <Name>KobiDataFramework</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

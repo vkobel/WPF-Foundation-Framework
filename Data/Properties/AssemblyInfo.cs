@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Data")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("KobiDataFramework")]
+[assembly: AssemblyDescription("Simple Data Framework by Vincent Kobel")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Hewlett-Packard Company")]
-[assembly: AssemblyProduct("Data")]
-[assembly: AssemblyCopyright("Copyright © Hewlett-Packard Company 2013")]
+[assembly: AssemblyCompany("Vincent Kobel")]
+[assembly: AssemblyProduct("KobiDataFramework")]
+[assembly: AssemblyCopyright("Copyright © Vincent Kobel 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

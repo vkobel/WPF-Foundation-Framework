@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="TestApp1.View.EmailsView"
+﻿<UserControl x:Class="KobiWPFFramework.View.EmailsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,7 +9,7 @@
     <DockPanel Background="White">
         <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="10,10" FontSize="12pt">Emails View (PoC)</TextBlock>
 
-        <ListBox DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="200" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding ColView}">
+        <ListBox DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="200" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding CollectionView}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -22,11 +22,11 @@
         <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="10,0">
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock HorizontalAlignment="Left" FontSize="10pt" Text="Nom: " />
-                <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="24" Text="{Binding ColView/BindingData.Lastname}" />
+                <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="24" Text="{Binding CollectionView/BindingData.Lastname}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock DockPanel.Dock="Left" HorizontalAlignment="Left" FontSize="10pt" Text="Prénom: " />
-                <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="24" Text="{Binding ColView/BindingData.Firstname}" />
+                <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="24" Text="{Binding CollectionView/BindingData.Firstname}" />
             </StackPanel>
         </StackPanel>
     </DockPanel>

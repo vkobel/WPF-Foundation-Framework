@@ -1,5 +1,5 @@
 ﻿
-namespace TestApp1.Navigation.Config {
+namespace KobiWPFFramework.Navigation.Config {
    class RH : NavigConfig {
       public RH() : base("Ressources Humaines", 0, true, "Informations sur tous les employés", "") { }
    }

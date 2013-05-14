@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Data
+namespace KobiDataFramework
 {
     using System;
     using System.Collections.Generic;

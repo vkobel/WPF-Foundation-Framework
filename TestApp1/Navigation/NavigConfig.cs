@@ -1,8 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 using System.Collections.Generic;
-using TestApp1.ViewModel;
+using KobiWPFFramework.ViewModel;
 
-namespace TestApp1.Navigation {
+namespace KobiWPFFramework.Navigation {
 
    public class NavigConfig {
       public string Name { get; set; }

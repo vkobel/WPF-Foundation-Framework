@@ -1,9 +1,9 @@
-﻿using Data;
-using Data.GenericRepo;
+﻿using KobiDataFramework;
+using KobiDataFramework.GenericRepo;
 using Ninject.Modules;
 using System.Data.Entity;
 
-namespace TestApp1.Ninject.Modules {
+namespace KobiWPFFramework.Ninject.Modules {
    class RepositoriesModule : NinjectModule {
 
       public override void Load() {

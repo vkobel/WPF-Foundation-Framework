@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace TestApp1.ExtensionMethods {
+namespace KobiWPFFramework.ExtensionMethods {
    public static class GenericPropertyMethods {
 
       public static PropertyInfo GetProperty(this object obj, string name) {

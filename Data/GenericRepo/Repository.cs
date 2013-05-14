@@ -1,16 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Objects;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Dynamic;
-using System.Threading;
 
-namespace Data.GenericRepo {
+namespace KobiDataFramework.GenericRepo {
    /// <summary>
    /// Build a repository for a specified POCO class and a DbContext
    /// </summary>
@@ -18,10 +14,9 @@ namespace Data.GenericRepo {
    public class Repository<T> : IRepository<T> where T: class {
       
       private DbContext ctx;
-      private DbSet<T> entities;
-
-      public DbSet<T> Entities {
-         get { return entities; }
+      
+      protected DbSet<T> entities {
+         get; set;
       }
 
       public Repository(DbContext ctx) {
@@ -33,6 +28,10 @@ namespace Data.GenericRepo {
       }
 
       #region repo methods
+
+      public IEnumerable<T> GetAllAsEnumerable() {
+         return entities.AsEnumerable();
+      }
 
       public T[] GetAll() {
          return entities.ToArray();

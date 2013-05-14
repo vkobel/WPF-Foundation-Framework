@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ninject;
-using TestApp1.Ninject.Modules;
+using KobiWPFFramework.Ninject.Modules;
 
-namespace TestApp1.Ninject {
+namespace KobiWPFFramework.Ninject {
 
    /// <summary>
    /// Singleton object to access the Ninject's kernel

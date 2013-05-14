@@ -1,13 +1,9 @@
-﻿using Data.GenericRepo;
+﻿using KobiDataFramework.GenericRepo;
 using GalaSoft.MvvmLight;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Dynamic;
-using TestApp1.ExtensionMethods;
-using TestApp1.Ninject;
+using KobiWPFFramework.Ninject;
 
-namespace TestApp1.ViewModel {
+namespace KobiWPFFramework.ViewModel {
    public abstract class DynamicViewModel<T> : ViewModelBase where T : class {
 
       protected T entity;

@@ -4,10 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
-using TestApp1.Navigation;
-using TestApp1.Navigation.Config;
+using KobiWPFFramework.Navigation;
+using KobiWPFFramework.Navigation.Config;
 
-namespace TestApp1.ViewModel {
+namespace KobiWPFFramework.ViewModel {
 
    public class ApplicationViewModel : ViewModelBase {
 

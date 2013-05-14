@@ -1,7 +1,7 @@
-TestApp1/bin/*
-TestApp1/obj/*
-Data/bin/*
-Data/obj/*
+KobiWPFFramework/bin/*
+KobiWPFFramework/obj/*
+KobiDataFramework/bin/*
+KobiDataFramework/obj/*
 packages/*
 
 # Build Folders (you can keep bin if you'd like, to store dlls and pdbs)

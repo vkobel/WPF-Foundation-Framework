@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Data.Entity;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Data.GenericRepo {
+namespace KobiDataFramework.GenericRepo {
 
    public interface IRepository<T> : IDisposable where T : class {
 
-      DbSet<T> Entities { get; }
-
       T[] GetAll();
+      IEnumerable<T> GetAllAsEnumerable();
       IQueryable<T> Query(Expression<Func<T, bool>> predicate);
       T GetSingle(Expression<Func<T, bool>> predicate);
 
