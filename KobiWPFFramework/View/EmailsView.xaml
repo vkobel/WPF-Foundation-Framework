@@ -13,7 +13,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="{Binding Path=BindingData.Fullname}" />
+                        <TextBlock Text="{Binding Path=Fullname}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
@@ -28,6 +28,21 @@
                 <TextBlock DockPanel.Dock="Left" HorizontalAlignment="Left" FontSize="10pt" Text="Prénom: " />
                 <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="24" Text="{Binding CollectionView/BindingData.Firstname}" />
             </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock DockPanel.Dock="Left" HorizontalAlignment="Left" FontSize="10pt" Text="Emails: " />
+                <ListBox DockPanel.Dock="Left" HorizontalAlignment="Left" Height="100" Width="200" ItemsSource="{Binding CollectionView/BindingData.Emails}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Path=Email1}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Button Content="Sort" Height="25" VerticalAlignment="Top" Width="100" Margin="0,10,0,0" Command="{Binding SortCmd}" />
+
+            </StackPanel>
         </StackPanel>
+        
     </DockPanel>
 </UserControl>
