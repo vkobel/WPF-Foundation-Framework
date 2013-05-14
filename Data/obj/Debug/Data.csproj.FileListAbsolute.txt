@@ -1,8 +1,0 @@
-C:\Users\vkobel\documents\visual studio 2012\Projects\TestApp1\Data\bin\Debug\Data.dll.config
-C:\Users\vkobel\documents\visual studio 2012\Projects\TestApp1\Data\bin\Debug\Data.dll
-C:\Users\vkobel\documents\visual studio 2012\Projects\TestApp1\Data\bin\Debug\Data.pdb
-C:\Users\vkobel\documents\visual studio 2012\Projects\TestApp1\Data\bin\Debug\EntityFramework.dll
-C:\Users\vkobel\documents\visual studio 2012\Projects\TestApp1\Data\bin\Debug\EntityFramework.xml
-C:\Users\vkobel\documents\visual studio 2012\Projects\TestApp1\Data\obj\Debug\Data.csprojResolveAssemblyReference.cache
-C:\Users\vkobel\documents\visual studio 2012\Projects\TestApp1\Data\obj\Debug\Data.dll
-C:\Users\vkobel\documents\visual studio 2012\Projects\TestApp1\Data\obj\Debug\Data.pdb
