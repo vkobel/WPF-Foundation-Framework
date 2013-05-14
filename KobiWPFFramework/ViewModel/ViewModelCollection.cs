@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using System.Threading;
 using System.Windows.Data;
 
 namespace KobiWPFFramework.ViewModel {
@@ -16,8 +17,9 @@ namespace KobiWPFFramework.ViewModel {
    /// </summary>
    /// <typeparam name="TEntity">The entity to be used along with the IRepository interface</typeparam>
    /// <typeparam name="TViewModel">The ViewModel of type DynamicViewModel<TEntity></typeparam>
-   public abstract class ViewModelCollection<TEntity, TViewModel> : ViewModelBase where TEntity : class 
-                                                                                  where TViewModel : ViewModelProxy<TEntity> {
+   public abstract class ViewModelCollection<TEntity, TViewModel> : ViewModelBase, IPreLoadable 
+                                                                    where TEntity : class 
+                                                                    where TViewModel : ViewModelProxy<TEntity> {
 
       private IEnumerable<TEntity> entites;
       private ICollectionView collectionView;
@@ -35,6 +37,7 @@ namespace KobiWPFFramework.ViewModel {
                foreach(var ent in entites)
                   all.Add(Activator.CreateInstance(typeof(TViewModel), ent) as TViewModel);
                collectionView = CollectionViewSource.GetDefaultView(all);
+               Thread.Sleep(5000);
             }
             return collectionView;
          }
@@ -55,6 +58,21 @@ namespace KobiWPFFramework.ViewModel {
          repo = Nj.I.Get<IRepository<TEntity>>();
          entites = predicate != null ? repo.Query(predicate) : repo.GetAllAsEnumerable();
       }
-   
+
+      /// <summary>
+      /// Must be overridden to perform all kind of long loading. It's used to know when to display a loading screen.
+      /// </summary>
+      public virtual void PreLoad() {
+         var c = CollectionView;
+      }
+
+      /// <summary>
+      /// Determines if the PreLoading is needed. Default is true. Overridding it and set it to false to disable PreLoading
+      /// for very short loading tasks.
+      /// </summary>
+      /// <returns>A boolean, true if the PreLoad is needed, otherwise false</returns>
+      public virtual bool IsPreLoadNeeded() {
+         return true;
+      }
    }
 }

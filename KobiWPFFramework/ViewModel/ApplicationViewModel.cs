@@ -5,6 +5,7 @@ using KobiWPFFramework.Navigation.Config;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace KobiWPFFramework.ViewModel {
@@ -32,9 +33,27 @@ namespace KobiWPFFramework.ViewModel {
          set {
             if(currentViewModel != value) {
                currentViewModel = value;
-               RaisePropertyChanged("CurrentViewModel");
+               // If the current VM need
+               if(currentViewModel is IPreLoadable) {
+                  var cvm = currentViewModel as IPreLoadable;
+                  if(cvm.IsPreLoadNeeded())
+                     AsyncLoadViewModel(cvm);
+               } else {
+                  RaisePropertyChanged("CurrentViewModel");
+               }
             }
          }
+      }
+
+      private async void AsyncLoadViewModel(IPreLoadable vm) {
+         
+         var swap = currentViewModel;
+         currentViewModel = new LoadingViewModel();
+         RaisePropertyChanged("CurrentViewModel");
+         
+         await Task.Factory.StartNew(() => vm.PreLoad());
+         currentViewModel = swap;
+         RaisePropertyChanged("CurrentViewModel");
       }
 
       // Currently selected main navig

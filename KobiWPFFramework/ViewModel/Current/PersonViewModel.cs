@@ -9,7 +9,7 @@ namespace KobiWPFFramework.ViewModel {
       public string Fullname { get { return BindingData.Firstname + " " + BindingData.Lastname; } }
 
       public PersonViewModel(Person p) : base(p) {
-         var proxy = BindingData as DynamicProxy; // simple cast to get intellisense on the dynamic (and compile verification)
+         var proxy = BindingData as DynamicProxy; // simple cast to enable intellisense on the dynamic object (and compile verification)
          proxy.Register(this);
          proxy.RegisterPropertyDependency("Fullname", "Firstname", "Lastname");
       }
@@ -21,6 +21,10 @@ namespace KobiWPFFramework.ViewModel {
       public PersonsViewModel() : base(p => p.Id <= 2){
       }
       */
+
+      public override void PreLoad() {
+         base.PreLoad();
+      }
 
       private ICommand sortCmd;
       public ICommand SortCmd {
