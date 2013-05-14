@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KobiWPFFramework", "TestApp1\KobiWPFFramework.csproj", "{502663D2-1467-43EE-88D2-5703454AD377}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KobiWPFFramework", "KobiWPFFramework\KobiWPFFramework.csproj", "{502663D2-1467-43EE-88D2-5703454AD377}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KobiDataFramework", "Data\KobiDataFramework.csproj", "{D710363D-C265-485D-A4EC-AE8C2919D998}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KobiDataFramework", "KobiDataFramework\KobiDataFramework.csproj", "{D710363D-C265-485D-A4EC-AE8C2919D998}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -162,7 +162,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data\KobiDataFramework.csproj">
+    <ProjectReference Include="..\KobiDataFramework\KobiDataFramework.csproj">
       <Project>{d710363d-c265-485d-a4ec-ae8c2919d998}</Project>
       <Name>KobiDataFramework</Name>
     </ProjectReference>
