@@ -4,7 +4,7 @@ using KobiWPFFramework.Navigation;
 using System.Windows.Input;
 
 namespace KobiWPFFramework.ViewModel {
-   class PersonViewModel : ProxiedViewModel<Person> {
+   class PersonViewModel : ViewModelProxy<Person> {
       
       public string Fullname { get { return BindingData.Firstname + " " + BindingData.Lastname; } }
 

@@ -10,7 +10,7 @@ namespace KobiWPFFramework.ViewModel {
    /// directly, or via the ViewModelCollection.
    /// </summary>
    /// <typeparam name="TEntity">The type of the model entity (to create the repository)</typeparam>
-   public abstract class ProxiedViewModel<TEntity> : ViewModelBase where TEntity : class {
+   public abstract class ViewModelProxy<TEntity> : ViewModelBase where TEntity : class {
 
       protected TEntity entity;
       private IRepository<TEntity> repo;
@@ -20,7 +20,7 @@ namespace KobiWPFFramework.ViewModel {
       /// </summary>
       public dynamic BindingData { get; set; }
 
-      public ProxiedViewModel(TEntity entity) {
+      public ViewModelProxy(TEntity entity) {
          this.entity = entity;
          this.repo = Nj.I.Get<IRepository<TEntity>>();
          BindingData = new DynamicProxy(entity);

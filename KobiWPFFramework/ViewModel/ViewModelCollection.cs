@@ -17,7 +17,7 @@ namespace KobiWPFFramework.ViewModel {
    /// <typeparam name="TEntity">The entity to be used along with the IRepository interface</typeparam>
    /// <typeparam name="TViewModel">The ViewModel of type DynamicViewModel<TEntity></typeparam>
    public abstract class ViewModelCollection<TEntity, TViewModel> : ViewModelBase where TEntity : class 
-                                                                                  where TViewModel : ProxiedViewModel<TEntity> {
+                                                                                  where TViewModel : ViewModelProxy<TEntity> {
 
       private IEnumerable<TEntity> entites;
       private ICollectionView collectionView;
