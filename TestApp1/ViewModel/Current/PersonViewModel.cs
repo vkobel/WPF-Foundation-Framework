@@ -1,21 +1,15 @@
 ﻿using KobiDataFramework;
-using KobiDataFramework.GenericRepo;
-using GalaSoft.MvvmLight;
-using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Windows.Data;
 using KobiWPFFramework.Navigation;
-using KobiWPFFramework.Ninject;
 
 namespace KobiWPFFramework.ViewModel {
-   class PersonViewModel : DynamicViewModel<Person> {
+   class PersonViewModel : ProxiedViewModel<Person> {
       
       public string Fullname { get { return BindingData.Firstname + " " + BindingData.Lastname; } }
 
       public PersonViewModel(Person p) : base(p) {
-         BindingData.RegisterProxiedObj(this);
-         BindingData.RegisterPropertyDependency("Fullname", "Firstname", "Lastname");
+         var proxy = BindingData as DynamicProxy;
+         proxy.Register(this);
+         proxy.RegisterPropertyDependency("Fullname", "Firstname", "Lastname");
       }
    }
 

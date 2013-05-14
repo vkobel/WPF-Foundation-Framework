@@ -1,16 +1,21 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using KobiWPFFramework.Navigation;
+using KobiWPFFramework.Navigation.Config;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
-using KobiWPFFramework.Navigation;
-using KobiWPFFramework.Navigation.Config;
 
 namespace KobiWPFFramework.ViewModel {
 
+   /// <summary>
+   /// Represents the current state of the application and manages a two levels navigation system.
+   /// Sort of an Orchestrator.
+   /// </summary>
    public class ApplicationViewModel : ViewModelBase {
 
+      #region private fields
       private ICommand changeViewCmd;
       private ICommand changeMainCmd;
 
@@ -18,7 +23,9 @@ namespace KobiWPFFramework.ViewModel {
       private NavigConfig currentMainNav;
 
       private List<NavigConfig> navStructure;
+      #endregion
 
+      #region Properties
       // Currently selected ViewModel
       public ViewModelBase CurrentViewModel {
          get { return currentViewModel; }
@@ -65,21 +72,25 @@ namespace KobiWPFFramework.ViewModel {
                return new List<NavigConfig> { CurrentMainNav };
          }
       }
+      #endregion
 
       // ctor: injection of all registred viewmodels (in MainViewModelsModule.cs)
+      /// <summary>
+      /// Instanciate the ApplicationViewModel. All registred ViewModels are injected into the param mainViewModels
+      /// </summary>
+      /// <param name="mainViewModels">An array of the application's ViewModels (injected)</param>
       public ApplicationViewModel(ViewModelBase[] mainViewModels) {
 
          // Load navigation informations
          NavigConfigLoader.RegisterConfigurations(new RH(), new Emp(), new EmpDetails(),
                                                   new TS(), new Agenda());
-
          navStructure = new List<NavigConfig>();
 
+         // Browse every ViewModels and search if it has a Navig attribute
          foreach(var vm in mainViewModels) {
             foreach(Attribute attr in vm.GetType().GetCustomAttributes(inherit: false)) {
                if(attr is NavigAttribute) {
                   var na = attr as NavigAttribute;
-                  
                   NavigConfig mainConf;
                   
                   // Check if it exists a NavigConf with the same name
@@ -102,11 +113,11 @@ namespace KobiWPFFramework.ViewModel {
                }
             }
          }
-
          CurrentMainNav = MainNavig[0];
          CurrentViewModel = SubNavig[0].VM;
       }
 
+      #region Commands
       public ICommand ChangeMainCmd {
          get {
             if(changeMainCmd == null)
@@ -122,6 +133,6 @@ namespace KobiWPFFramework.ViewModel {
             return changeViewCmd;
          }
       }
-
+      #endregion
    }
 }

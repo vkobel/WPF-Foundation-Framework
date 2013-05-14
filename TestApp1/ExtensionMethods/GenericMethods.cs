@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Reflection;
 
 namespace KobiWPFFramework.ExtensionMethods {
+
+   /// <summary>
+   /// Contains generic methods to access or set the properties of an object or a collection
+   /// </summary>
    public static class GenericPropertyMethods {
 
       public static PropertyInfo GetProperty(this object obj, string name) {

@@ -22,6 +22,7 @@ namespace KobiDataFramework.GenericRepo {
       public Repository(DbContext ctx) {
          this.ctx = ctx;
          
+         /// Get the matching DbSet by searching the properties of the context
          entities = ctx.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public)
                                  .Single(p => p.PropertyType == typeof(DbSet<T>))
                                  .GetValue(ctx) as DbSet<T>;
@@ -72,7 +73,6 @@ namespace KobiDataFramework.GenericRepo {
       #endregion
 
       public void Dispose() {
-         
          if(ctx != null) {
             ctx.Dispose();
             ctx = null;

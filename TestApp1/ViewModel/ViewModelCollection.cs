@@ -1,11 +1,11 @@
-﻿using KobiDataFramework.GenericRepo;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
+using KobiDataFramework.GenericRepo;
+using KobiWPFFramework.Ninject;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Windows.Data;
-using KobiWPFFramework.Ninject;
 
 namespace KobiWPFFramework.ViewModel {
 
@@ -16,8 +16,7 @@ namespace KobiWPFFramework.ViewModel {
    /// <typeparam name="TEntity">The entity to be used along with the IRepository interface</typeparam>
    /// <typeparam name="TViewModel">The ViewModel of type DynamicViewModel<TEntity></typeparam>
    public abstract class ViewModelCollection<TEntity, TViewModel> : ViewModelBase where TEntity : class 
-                                                                                  where TViewModel : DynamicViewModel<TEntity> {
-   
+                                                                                  where TViewModel : ProxiedViewModel<TEntity> {
       protected ObservableCollection<TViewModel> all { get; set; }
 
       /// <summary>
@@ -41,8 +40,9 @@ namespace KobiWPFFramework.ViewModel {
          all = new ObservableCollection<TViewModel>();
          CollectionView = CollectionViewSource.GetDefaultView(all);
          repo = Nj.I.Get<IRepository<TEntity>>();
+         
          var query = predicate != null ? repo.Query(predicate) : repo.GetAllAsEnumerable();
-         foreach(var ent in repo.Query(predicate))
+         foreach(var ent in query)
             all.Add(Activator.CreateInstance(typeof(TViewModel), ent) as TViewModel);
       }
    
