@@ -9,7 +9,7 @@
 
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:LoadingViewModel}">
-            <v:HelloView />
+            <v:LoadingView />
         </DataTemplate>
         
         <DataTemplate DataType="{x:Type vm:HelloViewModel}">
@@ -50,7 +50,7 @@
             </ItemsControl>
         </Border>
 
-        <ContentControl Content="{Binding CurrentViewModel}" Background="Green" />
+        <ContentControl Content="{Binding CurrentViewModel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="605" />
         
     </DockPanel>
 </Window>

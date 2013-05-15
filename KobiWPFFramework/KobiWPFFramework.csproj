@@ -103,6 +103,7 @@
     <Compile Include="ViewModel\ApplicationViewModel.cs" />
     <Compile Include="ViewModel\Current\PersonViewModel.cs" />
     <Compile Include="ViewModel\DynamicProxy.cs" />
+    <Compile Include="ViewModel\ILoadingViewModel.cs" />
     <Compile Include="ViewModel\IPreLoadable.cs" />
     <Compile Include="ViewModel\LoadingViewModel.cs" />
     <Compile Include="ViewModel\ViewModelProxy.cs" />
@@ -114,8 +115,8 @@
     <Compile Include="View\HelloView.xaml.cs">
       <DependentUpon>HelloView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Loading.xaml.cs">
-      <DependentUpon>Loading.xaml</DependentUpon>
+    <Compile Include="View\LoadingView.xaml.cs">
+      <DependentUpon>LoadingView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -137,7 +138,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Loading.xaml">
+    <Page Include="View\LoadingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

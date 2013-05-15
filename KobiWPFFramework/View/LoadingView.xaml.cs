@@ -17,8 +17,8 @@ namespace KobiWPFFramework.View {
    /// <summary>
    /// Interaction logic for Loading.xaml
    /// </summary>
-   public partial class Loading : UserControl {
-      public Loading() {
+   public partial class LoadingView : UserControl {
+      public LoadingView() {
          InitializeComponent();
       }
    }

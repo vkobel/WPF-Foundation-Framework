@@ -34,10 +34,10 @@ namespace KobiWPFFramework.ViewModel {
       public ICollectionView CollectionView {
          get {
             if(collectionView == null) {
+               //Thread.Sleep(5000);
                foreach(var ent in entites)
                   all.Add(Activator.CreateInstance(typeof(TViewModel), ent) as TViewModel);
                collectionView = CollectionViewSource.GetDefaultView(all);
-               Thread.Sleep(5000);
             }
             return collectionView;
          }
@@ -57,6 +57,9 @@ namespace KobiWPFFramework.ViewModel {
          all = new ObservableCollection<TViewModel>();
          repo = Nj.I.Get<IRepository<TEntity>>();
          entites = predicate != null ? repo.Query(predicate) : repo.GetAllAsEnumerable();
+         IsPreLoadNeeded = true;
+         IsCurrentlyLoading = false;
+         LoadingViewModel = Nj.I.Get<LoadingViewModel>();
       }
 
       /// <summary>
@@ -70,9 +73,17 @@ namespace KobiWPFFramework.ViewModel {
       /// Determines if the PreLoading is needed. Default is true. Overridding it and set it to false to disable PreLoading
       /// for very short loading tasks.
       /// </summary>
-      /// <returns>A boolean, true if the PreLoad is needed, otherwise false</returns>
-      public virtual bool IsPreLoadNeeded() {
-         return true;
-      }
+      public virtual bool IsPreLoadNeeded { get; set; }
+
+      /// <summary>
+      /// Indicates if there's a loading currently happening on the object
+      /// </summary>
+      public virtual bool IsCurrentlyLoading { get; set; }
+
+      /// <summary>
+      /// The ViewModel being displayed when PreLoad is called
+      /// </summary>
+      public ViewModelBase LoadingViewModel { get; set; }
    }
 }
+ 

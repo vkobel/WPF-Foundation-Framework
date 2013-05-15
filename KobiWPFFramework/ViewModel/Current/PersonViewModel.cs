@@ -16,6 +16,7 @@ namespace KobiWPFFramework.ViewModel {
    }
 
    [Navig("Ressources Humaines", "Persons")]
+   [Navig("Test")]
    class PersonsViewModel : ViewModelCollection<Person, PersonViewModel> {
       /*
       public PersonsViewModel() : base(p => p.Id <= 2){

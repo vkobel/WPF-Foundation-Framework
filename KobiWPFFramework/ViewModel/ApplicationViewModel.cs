@@ -17,6 +17,7 @@ namespace KobiWPFFramework.ViewModel {
    public class ApplicationViewModel : ViewModelBase {
 
       #region private fields
+
       private ICommand changeViewCmd;
       private ICommand changeMainCmd;
 
@@ -24,36 +25,57 @@ namespace KobiWPFFramework.ViewModel {
       private NavigConfig currentMainNav;
 
       private List<NavigConfig> navStructure;
+
+      private ViewModelBase nowLoadingViewModel;
+
       #endregion
 
       #region Properties
-      // Currently selected ViewModel
+
+      /// <summary>
+      /// Represents the currently displayed ViewModel. 
+      /// There is a special setter however to handle the async loading of IPreLoadable ViewModels
+      /// </summary>
       public ViewModelBase CurrentViewModel {
          get { return currentViewModel; }
          set {
             if(currentViewModel != value) {
                currentViewModel = value;
-               // If the current VM need
-               if(currentViewModel is IPreLoadable) {
+
+               if(currentViewModel is IPreLoadable) { 
                   var cvm = currentViewModel as IPreLoadable;
-                  if(cvm.IsPreLoadNeeded())
-                     AsyncLoadViewModel(cvm);
-               } else {
-                  RaisePropertyChanged("CurrentViewModel");
+                  if(cvm.IsPreLoadNeeded)      // Check if the ViewModel needs PreLoading
+                     AsyncLoadViewModel(cvm);  // Launch asynchronous loading
+                  else if(cvm.IsCurrentlyLoading) {           // If it's already loading 
+                     nowLoadingViewModel = currentViewModel;  // Change the current loading VM
+                     currentViewModel = cvm.LoadingViewModel; // And display the loading view
+                  }
                }
+               RaisePropertyChanged("CurrentViewModel");
             }
          }
       }
 
+      /// <summary>
+      /// Sets the view as a loading one and execute asynchronously the PreLoad method of IPreLoadable.
+      /// Once loaded, it replaces the loading view by the freshly loaded ViewModel
+      /// </summary>
+      /// <param name="vm"></param>
       private async void AsyncLoadViewModel(IPreLoadable vm) {
-         
-         var swap = currentViewModel;
-         currentViewModel = new LoadingViewModel();
-         RaisePropertyChanged("CurrentViewModel");
-         
-         await Task.Factory.StartNew(() => vm.PreLoad());
-         currentViewModel = swap;
-         RaisePropertyChanged("CurrentViewModel");
+         vm.IsPreLoadNeeded = false;             // This ViewModel doesn't need loading anymore
+         nowLoadingViewModel = currentViewModel; // Set the currently loading ViewModel
+         currentViewModel = vm.LoadingViewModel; // Display the loading view
+
+         vm.IsCurrentlyLoading = true;
+         await Task.Factory.StartNew(() => vm.PreLoad()); // Launch the preloading in another task
+         vm.IsCurrentlyLoading = false;
+
+         // Check if the view is a ILoadingViewModel and if it's currently in a loading state
+         if(currentViewModel is ILoadingViewModel && !(nowLoadingViewModel as IPreLoadable).IsCurrentlyLoading) {
+            currentViewModel = nowLoadingViewModel; // Replace the loading by the freshly loaded ViewModel
+            nowLoadingViewModel = null;
+            RaisePropertyChanged("CurrentViewModel");
+         }
       }
 
       // Currently selected main navig
@@ -91,6 +113,7 @@ namespace KobiWPFFramework.ViewModel {
                return new List<NavigConfig> { CurrentMainNav };
          }
       }
+
       #endregion
 
       // ctor: injection of all registred viewmodels (in MainViewModelsModule.cs)
@@ -137,6 +160,7 @@ namespace KobiWPFFramework.ViewModel {
       }
 
       #region Commands
+
       public ICommand ChangeMainCmd {
          get {
             if(changeMainCmd == null)
@@ -152,6 +176,7 @@ namespace KobiWPFFramework.ViewModel {
             return changeViewCmd;
          }
       }
+
       #endregion
    }
 }
