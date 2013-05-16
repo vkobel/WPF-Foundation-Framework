@@ -22,5 +22,13 @@ Main Features
 Samples
 -------
 
-Samples of code will eventually come one day ;)
+### Simplest possible ViewModel integrated with navigation `Humans -> Person`:
+```cs
+[Navig("Humans", "Person")]
+class PersonViewModel : ViewModelProxy<Person> {
+   public PersonViewModel(Person p) : base(p) {
+   }
+}
+```
 
+More samples will come ;)
