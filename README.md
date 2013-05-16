@@ -46,18 +46,18 @@ class PersonCollectionViewModel : ViewModelCollection<Person, PersonViewModel> {
 #### Usage in the view
 
 Access a simple property:
-```xml
-< (...) Text="{Binding BindingData.Lastname}" />
+```
+<(...) Text="{Binding BindingData.Lastname}" />
 ```
 
 Access a simple through the collection:
-```xml
-< (...) Text="{Binding CollectionView/BindingData.Lastname}" />
+```
+<(...) Text="{Binding CollectionView/BindingData.Lastname}" />
 ```
 
 Bind to the collection:
-```xml
-< (...) ItemsSource="{Binding CollectionView}" />
+```
+<(...) ItemsSource="{Binding CollectionView}" />
 ```
 
 More samples will come ;)

@@ -13,7 +13,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Text="{Binding Path=Fullname}" />
+                        <TextBlock Text="{Binding Path=BindingData.Fullname}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
