@@ -12,7 +12,7 @@ namespace FoundationWPF.Ninject.Modules {
 
          // Register all ViewModels
          Bind<ViewModelBase>().To<HelloViewModel>().InSingletonScope();
-         Bind<ViewModelBase>().To<PersonsViewModel>().InSingletonScope();
+         Bind<ViewModelBase>().To<PersonCollectionViewModel>().InSingletonScope();
       }
    }
 }

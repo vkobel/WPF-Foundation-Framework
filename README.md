@@ -22,13 +22,42 @@ Main Features
 Samples
 -------
 
-### Simplest possible ViewModel integrated with navigation `Humans -> Person`:
+#### Simplest possible ViewModel
+
+All ViewModelProxy<> exposes the all proxied properties through `BindingData`.
+
 ```cs
-[Navig("Humans", "Person")]
 class PersonViewModel : ViewModelProxy<Person> {
    public PersonViewModel(Person p) : base(p) {
    }
 }
+```
+
+#### A Collection ViewModel to display a list of person and their details, with navigation `Humans -> Person`
+
+Every ViewModelCollection exposes a public member `CollectionView`.
+
+```cs
+[Navig("Humans", "Person")]
+class PersonCollectionViewModel : ViewModelCollection<Person, PersonViewModel> {
+}
+```
+
+#### Usage in the view
+
+Access a simple property:
+```xml
+< (...) Text="{Binding BindingData.Lastname}" />
+```
+
+Access a simple through the collection:
+```xml
+< (...) Text="{Binding CollectionView/BindingData.Lastname}" />
+```
+
+Bind to the collection:
+```xml
+< (...) ItemsSource="{Binding CollectionView}" />
 ```
 
 More samples will come ;)
