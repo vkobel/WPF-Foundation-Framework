@@ -12,7 +12,7 @@ using System.Windows.Data;
 namespace FoundationWPF.ViewModel {
 
    /// <summary>
-   /// Represents a collection of typed ViewModels (all the same type). It exposes a CollectionView property containing
+   /// Represents a collection of typed ViewModels (all the same type). It exposes a "CollectionView" property containing
    /// all the ViewModels in a ICollectionView.
    /// </summary>
    /// <typeparam name="TEntity">The entity to be used along with the IRepository interface</typeparam>

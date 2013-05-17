@@ -7,6 +7,6 @@ namespace FoundationWPF.Navigation.Config {
       public Emp() : base("Employés", 0, true, "Informations sur tous les employés", "") { }
    }
    class EmpDetails : NavigConfig {
-      public EmpDetails() : base("Employés détails", 1, true, "Informations poussées sur tous les employés", "") { }
+      public EmpDetails() : base("Persons", 1, true, "Some good stuff", "") { }
    }
 }

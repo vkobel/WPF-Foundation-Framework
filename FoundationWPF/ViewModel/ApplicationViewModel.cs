@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using FoundationWPF.Security;
 
 namespace FoundationWPF.ViewModel {
 
@@ -122,6 +123,8 @@ namespace FoundationWPF.ViewModel {
       /// </summary>
       /// <param name="mainViewModels">An array of the application's ViewModels (injected)</param>
       public ApplicationViewModel(ViewModelBase[] mainViewModels) {
+
+         Initialization.Init();
 
          // Load navigation informations
          NavigConfigLoader.RegisterConfigurations(new RH(), new Emp(), new EmpDetails(),

@@ -30,6 +30,7 @@
                                 Content="{Binding Name}"
                                 Command="{Binding DataContext.ChangeMainCmd, ElementName=MainWindowApp}"
                                 CommandParameter="{Binding}"
+                                IsEnabled="{Binding Enabled}"
                                 Margin="2,5" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

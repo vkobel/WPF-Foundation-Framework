@@ -2,6 +2,7 @@
 using FoundationData;
 using FoundationWPF.Navigation;
 using System.Windows.Input;
+using FoundationWPF.Security;
 
 namespace FoundationWPF.ViewModel {
    class PersonViewModel : ViewModelProxy<Person> {
@@ -17,6 +18,7 @@ namespace FoundationWPF.ViewModel {
 
    [Navig("Ressources Humaines", "Persons")]
    [Navig("Test")]
+   [Auth("SuperUser", "TheMan")]
    class PersonCollectionViewModel : ViewModelCollection<Person, PersonViewModel> {
       /*
       public PersonsViewModel() : base(p => p.Id <= 2){
