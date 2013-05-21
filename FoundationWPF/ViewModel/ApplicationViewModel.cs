@@ -121,6 +121,7 @@ namespace FoundationWPF.ViewModel {
       /// Instanciate the ApplicationViewModel. All registred ViewModels are injected into the param mainViewModels
       /// </summary>
       /// <param name="mainViewModels">An array of the application's ViewModels (injected)</param>
+      /// <param name="currentUser">The current user of the application (injected)</param>
       public ApplicationViewModel(ViewModelFoundation[] mainViewModels) {
 
          // Load navigation informations
@@ -133,23 +134,26 @@ namespace FoundationWPF.ViewModel {
             foreach(NavigAttribute na in vm.GetType().GetCustomAttributes(typeof(NavigAttribute), inherit: false)) {
                NavigConfig mainConf;
                   
-               // Check if it exists a NavigConf with the same name
+               // Check if it already exists a NavigConf with the same name
                var existingMainConf = navStructure.SingleOrDefault(n => n.Name == na.MainConfig.Name);
 
-               if(existingMainConf != null) // If it's the case we reference it
+               if(existingMainConf != null) // If it's the case, set mainConf to it
                   mainConf = existingMainConf;
                else {                       // Else we use the MainConfig as a new elem of navStructure
+                  if(!IsAuthorized(vm.GetType(), CurrentUser))
+                     na.MainConfig.Enabled = false;
                   mainConf = na.MainConfig;
                   navStructure.Add(mainConf);
                }
 
-               // Assign the VM to the SubConfig or the main
+               // Assign the VM to the SubConfig or the main (if NavigAttribute has a single param)
                if(na.SubConfig != null) {
+                  if(!IsAuthorized(vm.GetType(), CurrentUser)) 
+                     na.SubConfig.Enabled = false;
                   na.SubConfig.VM = vm;
                   mainConf.SubConfig.Add(na.SubConfig);
-               } else {
+               } else
                   mainConf.VM = vm;
-               }
             }
          }
          CurrentMainNav = MainNavig[0];

@@ -1,7 +1,6 @@
 ﻿using FoundationWPF.Navigation;
 using FoundationWPF.Ninject;
 using System.Threading;
-using FoundationWPF.Security;
 
 namespace FoundationWPF.ViewModel {
 

@@ -1,13 +1,11 @@
-﻿using GalaSoft.MvvmLight;
+﻿using FoundationWPF.Security;
 using Ninject.Modules;
-using FoundationWPF.ViewModel;
-using FoundationWPF.Security;
 
 namespace FoundationWPF.Ninject.Modules {
    class SecurityModule : NinjectModule {
 
       public override void Load() {
-
+         //Bind<SecurityObject>().To<CurrentUser>().When(req => req.Target.Member.Name.ToLower() == "currentuser").InSingletonScope();
          Bind<CurrentUser>().ToSelf().InSingletonScope();
       }
    }

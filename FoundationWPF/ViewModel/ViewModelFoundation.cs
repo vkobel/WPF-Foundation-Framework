@@ -11,14 +11,17 @@ namespace FoundationWPF.ViewModel {
    /// </summary>
    public abstract class ViewModelFoundation : ViewModelBase {
 
+      public SecurityObject CurrentUser { get; private set; }
       public event EventHandler ViewModelDisplayed;
 
       public ViewModelFoundation(){
 
-         /// Default behavior: if the viewmodel is displayed without proper access rights 
+         CurrentUser = Nj.I.Get<CurrentUser>();
+
+         /// Default behavior: if the ViewModel is displayed without proper access rights 
          /// it throws an exception (for the final user, the program will crash).
          ViewModelDisplayed += (sender, e) => {
-            if(!IsAuthorized(sender.GetType(), Nj.I.Get<CurrentUser>()))
+            if(!IsAuthorized(sender.GetType(), CurrentUser))
                throw new Exception("Insufficient authorization level");
          };
       }
@@ -31,7 +34,7 @@ namespace FoundationWPF.ViewModel {
       /// <returns>true if the securityObject is able to access the vmType, then false</returns>
       protected bool IsAuthorized(Type vmType, SecurityObject securityObject) {
          AuthAttribute aa = vmType.GetCustomAttributes(typeof(AuthAttribute), inherit: true).FirstOrDefault() as AuthAttribute;
-         if(aa != null && securityObject.Roles != null)
+         if(aa != null && securityObject != null && securityObject.Roles != null)
             return securityObject.Roles.Any(r => aa.AllowedRoles.Contains(r));
          return true;
       }

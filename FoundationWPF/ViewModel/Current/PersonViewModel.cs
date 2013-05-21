@@ -2,7 +2,6 @@
 using FoundationWPF.Navigation;
 using FoundationWPF.Security;
 using GalaSoft.MvvmLight.Command;
-using System;
 using System.ComponentModel;
 using System.Windows.Input;
 
@@ -19,6 +18,7 @@ namespace FoundationWPF.ViewModel {
    }
 
    [Navig("Ressources Humaines", "Persons")]
+   [Navig("Test")]
    [Auth("TheMan")]
    class PersonCollectionViewModel : ViewModelCollection<Person, PersonViewModel> {
 
