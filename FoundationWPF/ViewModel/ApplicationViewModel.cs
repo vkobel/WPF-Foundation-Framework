@@ -32,7 +32,7 @@ namespace FoundationWPF.ViewModel {
 
       /// <summary>
       /// Represents the currently displayed ViewModel. 
-      /// There is a special setter however to handle the async loading of IPreLoadable ViewModels
+      /// There is a special setter, however, to handle the async loading of IPreLoadable ViewModels
       /// </summary>
       public ViewModelFoundation CurrentViewModel {
          get { return currentViewModel; }
@@ -49,6 +49,7 @@ namespace FoundationWPF.ViewModel {
                      currentViewModel = cvm.LoadingViewModel; // And display the loading view
                   }
                }
+               RaiseViewModelDisplayed(currentViewModel);
                RaisePropertyChanged("CurrentViewModel");
             }
          }
@@ -72,6 +73,7 @@ namespace FoundationWPF.ViewModel {
          if(currentViewModel is ILoadingViewModel && !(nowLoadingViewModel as IPreLoadable).IsCurrentlyLoading) {
             currentViewModel = nowLoadingViewModel; // Replace the loading by the freshly loaded ViewModel
             nowLoadingViewModel = null;
+            RaiseViewModelDisplayed(currentViewModel);
             RaisePropertyChanged("CurrentViewModel");
          }
       }

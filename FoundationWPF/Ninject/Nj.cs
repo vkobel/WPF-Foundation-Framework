@@ -17,7 +17,8 @@ namespace FoundationWPF.Ninject {
       public IKernel Kernel { get; private set; }
 
       private Nj() {
-         Kernel = new StandardKernel(new RepositoriesModule(),
+         Kernel = new StandardKernel(new SecurityModule(),
+                                     new RepositoriesModule(),
                                      new MainViewModelsModule());
       }
 

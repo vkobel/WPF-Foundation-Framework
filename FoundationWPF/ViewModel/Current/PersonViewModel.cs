@@ -1,8 +1,10 @@
-﻿using GalaSoft.MvvmLight.Command;
-using FoundationData;
+﻿using FoundationData;
 using FoundationWPF.Navigation;
-using System.Windows.Input;
 using FoundationWPF.Security;
+using GalaSoft.MvvmLight.Command;
+using System;
+using System.ComponentModel;
+using System.Windows.Input;
 
 namespace FoundationWPF.ViewModel {
    class PersonViewModel : ViewModelProxy<Person> {
@@ -19,21 +21,20 @@ namespace FoundationWPF.ViewModel {
    [Navig("Ressources Humaines", "Persons")]
    [Auth("TheMan")]
    class PersonCollectionViewModel : ViewModelCollection<Person, PersonViewModel> {
-      /*
-      public PersonsViewModel() : base(p => p.Id <= 2){
+
+      public PersonCollectionViewModel() /*: base(p => p.Id <= 2)*/ {
       }
-      */
 
       private ICommand sortCmd;
       public ICommand SortCmd {
          get {
             if(sortCmd == null)
                sortCmd = new RelayCommand(() => 
-                  CollectionView.SortDescriptions.Add(new System.ComponentModel.SortDescription("BindingData.Lastname", System.ComponentModel.ListSortDirection.Ascending))
+                  CollectionView.SortDescriptions.Add(new SortDescription("BindingData.Lastname", ListSortDirection.Ascending))
                );
             return sortCmd;
          }
-      }
+      } 
 
    }
 
