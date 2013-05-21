@@ -111,6 +111,7 @@
     <Compile Include="ViewModel\ILoadingViewModel.cs" />
     <Compile Include="ViewModel\IPreLoadable.cs" />
     <Compile Include="ViewModel\LoadingViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelFoundation.cs" />
     <Compile Include="ViewModel\ViewModelProxy.cs" />
     <Compile Include="ViewModel\ViewModelCollection.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

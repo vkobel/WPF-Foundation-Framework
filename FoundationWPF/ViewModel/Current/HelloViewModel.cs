@@ -1,13 +1,14 @@
-﻿using GalaSoft.MvvmLight;
-using FoundationWPF.Navigation;
+﻿using FoundationWPF.Navigation;
 using FoundationWPF.Ninject;
 using System.Threading;
+using FoundationWPF.Security;
 
 namespace FoundationWPF.ViewModel {
 
    [Navig("Ressources Humaines", "Employés")]
    [Navig("Ressources Humaines", "Employés détails")]
-   public class HelloViewModel : ViewModelBase { //, IPreLoadable { 
+   //[Auth("TheMan")]
+   public class HelloViewModel : ViewModelFoundation { //, IPreLoadable { 
 
       public string Name { get; set; }
 
@@ -22,6 +23,6 @@ namespace FoundationWPF.ViewModel {
       public void PreLoad() {
          Thread.Sleep(4000);
       }
-      public ViewModelBase LoadingViewModel { get; set; }
+      public ViewModelFoundation LoadingViewModel { get; set; }
    }
 }

@@ -133,28 +133,25 @@ namespace FoundationWPF.ViewModel {
 
          // Browse every ViewModels and search if it has a Navig attribute
          foreach(var vm in mainViewModels) {
-            foreach(Attribute attr in vm.GetType().GetCustomAttributes(inherit: false)) {
-               if(attr is NavigAttribute) {
-                  var na = attr as NavigAttribute;
-                  NavigConfig mainConf;
+            foreach(NavigAttribute na in vm.GetType().GetCustomAttributes(typeof(NavigAttribute), inherit: false)) {
+               NavigConfig mainConf;
                   
-                  // Check if it exists a NavigConf with the same name
-                  var existingMainConf = navStructure.SingleOrDefault(n => n.Name == na.MainConfig.Name);
+               // Check if it exists a NavigConf with the same name
+               var existingMainConf = navStructure.SingleOrDefault(n => n.Name == na.MainConfig.Name);
 
-                  if(existingMainConf != null) // If it's the case we reference it
-                     mainConf = existingMainConf;
-                  else {                       // Else we use the MainConfig as a new elem of navStructure
-                     mainConf = na.MainConfig;
-                     navStructure.Add(mainConf);
-                  }
+               if(existingMainConf != null) // If it's the case we reference it
+                  mainConf = existingMainConf;
+               else {                       // Else we use the MainConfig as a new elem of navStructure
+                  mainConf = na.MainConfig;
+                  navStructure.Add(mainConf);
+               }
 
-                  // Assign the VM to the SubConfig or the main
-                  if(na.SubConfig != null) {
-                     na.SubConfig.VM = vm;
-                     mainConf.SubConfig.Add(na.SubConfig);
-                  } else {
-                     mainConf.VM = vm;
-                  }
+               // Assign the VM to the SubConfig or the main
+               if(na.SubConfig != null) {
+                  na.SubConfig.VM = vm;
+                  mainConf.SubConfig.Add(na.SubConfig);
+               } else {
+                  mainConf.VM = vm;
                }
             }
          }

@@ -1,12 +1,10 @@
-﻿using GalaSoft.MvvmLight;
-using FoundationData.GenericRepo;
+﻿using FoundationData.GenericRepo;
 using FoundationWPF.Ninject;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq.Expressions;
-using System.Threading;
 using System.Windows.Data;
 
 namespace FoundationWPF.ViewModel {
@@ -17,7 +15,7 @@ namespace FoundationWPF.ViewModel {
    /// </summary>
    /// <typeparam name="TEntity">The entity to be used along with the IRepository interface</typeparam>
    /// <typeparam name="TViewModel">The ViewModel of type DynamicViewModel<TEntity></typeparam>
-   public abstract class ViewModelCollection<TEntity, TViewModel> : ViewModelBase, IPreLoadable 
+   public abstract class ViewModelCollection<TEntity, TViewModel> : ViewModelFoundation, IPreLoadable 
                                                                     where TEntity : class 
                                                                     where TViewModel : ViewModelProxy<TEntity> {
 
@@ -53,7 +51,7 @@ namespace FoundationWPF.ViewModel {
       /// Create an instance with all the records matching the given predicate
       /// </summary>
       /// <param name="predicate">The predicate to be applied to the model</param>
-      public ViewModelCollection(Expression<Func<TEntity, bool>> predicate) {
+      public ViewModelCollection(Expression<Func<TEntity, bool>> predicate) : base() {
          all = new ObservableCollection<TViewModel>();
          repo = Nj.I.Get<IRepository<TEntity>>();
          entites = predicate != null ? repo.Query(predicate) : repo.GetAllAsEnumerable();
@@ -83,7 +81,7 @@ namespace FoundationWPF.ViewModel {
       /// <summary>
       /// The ViewModel being displayed when PreLoad is called
       /// </summary>
-      public ViewModelBase LoadingViewModel { get; set; }
+      public ViewModelFoundation LoadingViewModel { get; set; }
    }
 }
  

@@ -1,5 +1,4 @@
-﻿using GalaSoft.MvvmLight;
-using FoundationData.GenericRepo;
+﻿using FoundationData.GenericRepo;
 using FoundationWPF.Ninject;
 using System.ComponentModel;
 
@@ -10,7 +9,7 @@ namespace FoundationWPF.ViewModel {
    /// directly, or via the ViewModelCollection.
    /// </summary>
    /// <typeparam name="TEntity">The type of the model entity (to create the repository)</typeparam>
-   public abstract class ViewModelProxy<TEntity> : ViewModelBase where TEntity : class {
+   public abstract class ViewModelProxy<TEntity> : ViewModelFoundation where TEntity : class {
 
       protected TEntity entity;
       private IRepository<TEntity> repo;
@@ -20,7 +19,7 @@ namespace FoundationWPF.ViewModel {
       /// </summary>
       public dynamic BindingData { get; set; }
 
-      public ViewModelProxy(TEntity entity) {
+      public ViewModelProxy(TEntity entity) : base() {
          this.entity = entity;
          this.repo = Nj.I.Get<IRepository<TEntity>>();
          BindingData = new DynamicProxy(entity);

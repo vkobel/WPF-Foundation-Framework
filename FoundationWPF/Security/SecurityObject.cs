@@ -3,7 +3,7 @@
 namespace FoundationWPF.Security {
 
    /// <summary>
-   /// Represent a security object by the Roles it holds. Usually, this type is registred 
+   /// Represent a security object by the Roles it holds. Usually, this type is binded (IoC) 
    /// to only one singleton object representing the current user of the application.
    /// </summary>
    public abstract class SecurityObject {
