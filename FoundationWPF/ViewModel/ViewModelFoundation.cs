@@ -11,7 +11,10 @@ namespace FoundationWPF.ViewModel {
    public abstract class ViewModelFoundation : ViewModelBase {
 
       public ViewModelFoundation() {
-         
+         foreach(AuthAttribute aa in this.GetType().GetCustomAttributes(typeof(AuthAttribute), inherit: true)) {
+            var plop = Nj.I.Get<CurrentUser>();
+            var i = 0;
+         }
       }
    
    }

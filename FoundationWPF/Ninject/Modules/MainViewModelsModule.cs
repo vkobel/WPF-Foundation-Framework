@@ -1,6 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using FoundationWPF.ViewModel;
 using Ninject.Modules;
-using FoundationWPF.ViewModel;
 
 namespace FoundationWPF.Ninject.Modules {
    class MainViewModelsModule : NinjectModule {
@@ -11,8 +10,8 @@ namespace FoundationWPF.Ninject.Modules {
          Bind<LoadingViewModel>().ToSelf().InSingletonScope();
 
          // Register all ViewModels
-         Bind<ViewModelBase>().To<HelloViewModel>().InSingletonScope();
-         Bind<ViewModelBase>().To<PersonCollectionViewModel>().InSingletonScope();
+         Bind<ViewModelFoundation>().To<HelloViewModel>().InSingletonScope();
+         Bind<ViewModelFoundation>().To<PersonCollectionViewModel>().InSingletonScope();
       }
    }
 }

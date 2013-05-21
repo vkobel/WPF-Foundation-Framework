@@ -12,7 +12,7 @@ namespace FoundationWPF.Navigation {
       public string ImgPath { get; set; }
       
       public List<NavigConfig> SubConfig { get; set; }
-      public ViewModelBase VM { get; set; }
+      public ViewModelFoundation VM { get; set; }
 
       public NavigConfig(string name, int pos = 9999, bool enabled = true, string desc = "", string imgPath = "") {
          Name = name;

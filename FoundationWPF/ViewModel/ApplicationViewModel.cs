@@ -1,13 +1,10 @@
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
 using FoundationWPF.Navigation;
 using FoundationWPF.Navigation.Config;
-using System;
+using GalaSoft.MvvmLight.Command;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using FoundationWPF.Security;
 
 namespace FoundationWPF.ViewModel {
 
@@ -15,19 +12,19 @@ namespace FoundationWPF.ViewModel {
    /// Represents the current state of the application and manages a two levels navigation system.
    /// Sort of an Orchestrator.
    /// </summary>
-   public class ApplicationViewModel : ViewModelBase {
+   public class ApplicationViewModel : ViewModelFoundation {
 
       #region private fields
 
       private ICommand changeViewCmd;
       private ICommand changeMainCmd;
 
-      private ViewModelBase currentViewModel;
+      private ViewModelFoundation currentViewModel;
       private NavigConfig currentMainNav;
 
       private List<NavigConfig> navStructure;
 
-      private ViewModelBase nowLoadingViewModel;
+      private ViewModelFoundation nowLoadingViewModel;
 
       #endregion
 
@@ -37,7 +34,7 @@ namespace FoundationWPF.ViewModel {
       /// Represents the currently displayed ViewModel. 
       /// There is a special setter however to handle the async loading of IPreLoadable ViewModels
       /// </summary>
-      public ViewModelBase CurrentViewModel {
+      public ViewModelFoundation CurrentViewModel {
          get { return currentViewModel; }
          set {
             if(currentViewModel != value) {
@@ -122,9 +119,7 @@ namespace FoundationWPF.ViewModel {
       /// Instanciate the ApplicationViewModel. All registred ViewModels are injected into the param mainViewModels
       /// </summary>
       /// <param name="mainViewModels">An array of the application's ViewModels (injected)</param>
-      public ApplicationViewModel(ViewModelBase[] mainViewModels) {
-
-         Initialization.Init();
+      public ApplicationViewModel(ViewModelFoundation[] mainViewModels) {
 
          // Load navigation informations
          NavigConfigLoader.RegisterConfigurations(new RH(), new Emp(), new EmpDetails(),
@@ -172,7 +167,7 @@ namespace FoundationWPF.ViewModel {
       public ICommand ChangeViewCmd {
          get {
             if(changeViewCmd == null)
-               changeViewCmd = new RelayCommand<ViewModelBase>(vm => CurrentViewModel = vm);
+               changeViewCmd = new RelayCommand<ViewModelFoundation>(vm => CurrentViewModel = vm);
             return changeViewCmd;
          }
       }

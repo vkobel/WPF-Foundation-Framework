@@ -26,7 +26,7 @@ namespace FoundationWPF.ViewModel {
          (BindingData as INotifyPropertyChanged).PropertyChanged += DynamicViewModel_PropertyChanged;
       }
 
-      // Alert the ViewModelBase if a property has changed and persist the data
+      // Alert the ViewModelFoundation if a property has changed and persist the data
       private void DynamicViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e) {
          RaisePropertyChanged(e.PropertyName);
          
