@@ -26,7 +26,7 @@ namespace FoundationWPF.Security {
       /// </summary>
       public abstract void Login();
 
-      public virtual async void AsyncLogin() {
+      public async void AsyncLogin() {
          await Task.Factory.StartNew(Login);
          AsyncLoadingFinished(this, EventArgs.Empty);
       }

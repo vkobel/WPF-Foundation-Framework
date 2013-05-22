@@ -72,11 +72,16 @@ namespace FoundationData.GenericRepo {
 
       #endregion
 
-      public void Dispose() {
-         if(ctx != null) {
+      protected virtual void Dispose(bool all) {
+         if(all && ctx != null) {
             ctx.Dispose();
             ctx = null;
          }
+         entities = null;
+      }
+
+      public void Dispose() {
+         Dispose(true);
          GC.SuppressFinalize(this);
       }
    

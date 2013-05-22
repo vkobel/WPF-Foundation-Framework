@@ -9,6 +9,9 @@ namespace FoundationWPF.Security {
    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
    class AuthAttribute : Attribute {
 
+      /// <summary>
+      /// Roles that have to match against a SecurityObject
+      /// </summary>
       public List<string> AllowedRoles { get; private set; }
 
       public AuthAttribute(params string[] roles) {

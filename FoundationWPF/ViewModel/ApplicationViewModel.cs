@@ -123,19 +123,18 @@ namespace FoundationWPF.ViewModel {
       /// <param name="loadingVm">The ViewModel representing the loading (injected)</param>
       public ApplicationViewModel(ViewModelFoundation[] mainViewModels, ViewModelFoundation loadingVm, ViewModelFoundation authVm) {
 
+         // Set the callback when the CurrentUser object has finished loading
          CurrentUser.AsyncLoadingFinished += (s, a) => {
             LoadNavigation(mainViewModels);
             RaisePropertyChanged("MainNavig");
          };
-
-         CurrentViewModel = authVm;
-         CurrentUser.AsyncLogin();
+         CurrentViewModel = authVm; // Display the authentication view
+         CurrentUser.AsyncLogin();  // Asynchronously log the user in
 
          loadingViewModel = loadingVm;
 
          // Load navigation informations
-         NavigConfigLoader.RegisterConfigurations(new RH(), new Emp(), new EmpDetails(),
-                                                  new TS(), new Agenda());
+         NavigConfigLoader.RegisterConfigurations(new RH(), new Emp(), new EmpDetails(), new TS(), new Agenda());
 
          changeMainCmd = new Lazy<ICommand>(() => new RelayCommand<NavigConfig>(nc => CurrentMainNav = nc));
          changeViewCmd = new Lazy<ICommand>(() => new RelayCommand<ViewModelFoundation>(vm => CurrentViewModel = vm));
@@ -158,7 +157,7 @@ namespace FoundationWPF.ViewModel {
                if(existingMainConf != null) // If it's the case, set mainConf to it
                   mainConf = existingMainConf;
                else {                       // Else we use the MainConfig as a new elem of navStructure
-                  if(!IsAuthorized(vm.GetType(), CurrentUser))
+                  if(!vm.IsAuthorized(CurrentUser))
                      na.MainConfig.Enabled = false;
                   mainConf = na.MainConfig;
                   navStructure.Add(mainConf);
@@ -166,7 +165,7 @@ namespace FoundationWPF.ViewModel {
 
                // Assign the VM to the SubConfig or the main (if NavigAttribute has a single param)
                if(na.SubConfig != null) {
-                  if(!IsAuthorized(vm.GetType(), CurrentUser))
+                  if(!vm.IsAuthorized(CurrentUser))
                      na.SubConfig.Enabled = false;
                   na.SubConfig.VM = vm;
                   mainConf.SubConfig.Add(na.SubConfig);

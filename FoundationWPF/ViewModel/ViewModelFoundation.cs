@@ -21,7 +21,7 @@ namespace FoundationWPF.ViewModel {
          /// Default behavior: if the ViewModel is displayed without proper access rights 
          /// it throws an exception (for the final user, the program will crash).
          ViewModelDisplayed += (sender, e) => {
-            if(!IsAuthorized(sender.GetType(), CurrentUser))
+            if(!(sender as ViewModelFoundation).IsAuthorized(CurrentUser))
                throw new Exception("Insufficient authorization level");
          };
       }
@@ -29,11 +29,10 @@ namespace FoundationWPF.ViewModel {
       /// <summary>
       /// Check if the specified vmType has an AuthAttribute and if the SecurityObject has the proper role(s)
       /// </summary>
-      /// <param name="vmType">Type of the ViewModel to check for a AuthAttribute</param>
       /// <param name="securityObject">The security object containing the Roles (typically the current user)</param>
       /// <returns>true if the securityObject is able to access the vmType, then false</returns>
-      protected bool IsAuthorized(Type vmType, SecurityObject securityObject) {
-         AuthAttribute aa = vmType.GetCustomAttributes(typeof(AuthAttribute), inherit: true).FirstOrDefault() as AuthAttribute;
+      public bool IsAuthorized(SecurityObject securityObject) {
+         AuthAttribute aa = this.GetType().GetCustomAttributes(typeof(AuthAttribute), inherit: true).FirstOrDefault() as AuthAttribute;
          if(aa != null && securityObject != null && securityObject.Roles != null)
             return securityObject.Roles.Any(r => aa.AllowedRoles.Contains(r));
          return true;
