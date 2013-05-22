@@ -33,7 +33,7 @@ namespace FoundationWPF.ViewModel {
          get {
             if(collectionView == null) {
                //Thread.Sleep(5000);
-               foreach(var ent in entites)
+               foreach(var ent in entites) // real loading of entites (previously lazily loaded)
                   all.Add(Activator.CreateInstance(typeof(TViewModel), ent) as TViewModel);
                collectionView = CollectionViewSource.GetDefaultView(all);
             }
@@ -42,23 +42,27 @@ namespace FoundationWPF.ViewModel {
       }
 
       /// <summary>
-      /// Create an instance with every records in the repository (model)
+      /// Create a new ViewModelCollection, containing by default every entites. Use the 
+      /// Filter(predicate) method to apply a filter.
       /// </summary>
-      public ViewModelCollection() : this(null) {
+      public ViewModelCollection() : base() {
+         all = new ObservableCollection<TViewModel>();
+         repo = Nj.I.Get<IRepository<TEntity>>();
+         entites = repo.GetAllAsEnumerable(); // lazy loaded
+         IsPreLoadNeeded = true;
       }
 
       /// <summary>
-      /// Create an instance with all the records matching the given predicate
+      /// Filter the entites collection with a given predicate, null for all entites.
       /// </summary>
-      /// <param name="predicate">The predicate to be applied to the model</param>
-      public ViewModelCollection(Expression<Func<TEntity, bool>> predicate) : base() {
-         all = new ObservableCollection<TViewModel>();
-         repo = Nj.I.Get<IRepository<TEntity>>();
+      /// <param name="predicate">The predicate to filter the entites collection, null to select all entites.</param>
+      public void Filter(Expression<Func<TEntity, bool>> predicate) {
          entites = predicate != null ? repo.Query(predicate) : repo.GetAllAsEnumerable();
-         IsPreLoadNeeded = true;
-         IsCurrentlyLoading = false;
-         LoadingViewModel = Nj.I.Get<LoadingViewModel>();
       }
+
+      #region IPreLoadable stuff
+
+      public ViewModelFoundation LoadingViewModel { get; set; }
 
       /// <summary>
       /// Must be overridden to perform all kind of long loading. It's used to know when to display a loading screen.
@@ -67,21 +71,11 @@ namespace FoundationWPF.ViewModel {
          var c = CollectionView;
       }
 
-      /// <summary>
-      /// Determines if the PreLoading is needed. Default is true. Overridding it and set it to false to disable PreLoading
-      /// for very short loading tasks.
-      /// </summary>
       public virtual bool IsPreLoadNeeded { get; set; }
 
-      /// <summary>
-      /// Indicates if there's a loading currently happening on the object
-      /// </summary>
       public virtual bool IsCurrentlyLoading { get; set; }
 
-      /// <summary>
-      /// The ViewModel being displayed when PreLoad is called
-      /// </summary>
-      public ViewModelFoundation LoadingViewModel { get; set; }
+      #endregion
    }
 }
  

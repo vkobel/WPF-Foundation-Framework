@@ -11,17 +11,19 @@ namespace FoundationWPF.ViewModel {
 
       public string Name { get; set; }
 
-      public HelloViewModel() {
+      public HelloViewModel(ViewModelFoundation loadingVm) {
          Name = "Hello World of Employés";
          IsPreLoadNeeded = true;
-         LoadingViewModel = Nj.I.Get<LoadingViewModel>();
+         LoadingViewModel = loadingVm;
       }
+
+      public ViewModelFoundation LoadingViewModel { get; set; }
 
       public bool IsPreLoadNeeded { get; set; }
       public bool IsCurrentlyLoading { get; set; }
       public void PreLoad() {
          Thread.Sleep(4000);
       }
-      public ViewModelFoundation LoadingViewModel { get; set; }
+      
    }
 }

@@ -18,11 +18,12 @@ namespace FoundationWPF.ViewModel {
    }
 
    [Navig("Ressources Humaines", "Persons")]
-   [Navig("Test")]
    [Auth("TheMan")]
    class PersonCollectionViewModel : ViewModelCollection<Person, PersonViewModel> {
 
-      public PersonCollectionViewModel() /*: base(p => p.Id <= 2)*/ {
+      public PersonCollectionViewModel(ViewModelFoundation loadingVm) : base() {
+         //Filter(p => p.Id <= 2);
+         LoadingViewModel = loadingVm;
       }
 
       private ICommand sortCmd;

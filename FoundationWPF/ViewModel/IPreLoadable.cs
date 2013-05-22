@@ -2,9 +2,26 @@
 namespace FoundationWPF.ViewModel {
    
    interface IPreLoadable {
-      bool IsPreLoadNeeded { get; set; }
-      bool IsCurrentlyLoading { get; set; }
+
+      /// <summary>
+      /// The ViewModel being displayed when PreLoad is called
+      /// </summary>
       ViewModelFoundation LoadingViewModel { get; set; }
+
+      /// <summary>
+      /// Determines if the PreLoading is needed. Default is true. Overridding it and set it to false to disable PreLoading
+      /// for very short loading tasks.
+      /// </summary>
+      bool IsPreLoadNeeded { get; set; }
+
+      /// <summary>
+      /// Indicates if there's a loading currently happening on the object
+      /// </summary>
+      bool IsCurrentlyLoading { get; set; }
+
+      /// <summary>
+      /// Put all the loading logic in this method
+      /// </summary>
       void PreLoad();
    }
 }

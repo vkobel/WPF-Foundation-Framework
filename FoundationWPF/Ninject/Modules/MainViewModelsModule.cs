@@ -6,8 +6,8 @@ namespace FoundationWPF.Ninject.Modules {
 
       public override void Load() {
 
-         // Loading screen ViewModel
-         Bind<LoadingViewModel>().ToSelf().InSingletonScope();
+         // Bind the Loading ViewModel to any ViewModelFoundation variable that starts with "load"
+         Bind<ViewModelFoundation>().To<LoadingViewModel>().When(req => req.Target.Name.StartsWith("load")).InSingletonScope();
 
          // Register all ViewModels
          Bind<ViewModelFoundation>().To<HelloViewModel>().InSingletonScope();
