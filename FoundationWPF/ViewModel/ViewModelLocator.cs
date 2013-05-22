@@ -22,7 +22,7 @@ namespace FoundationWPF.ViewModel {
       public ApplicationViewModel Main {
          get {
             // Login current user
-            Nj.I.Get<CurrentUser>().Login();
+            Nj.I.Get<CurrentUser>().AsyncLogin();
             return Nj.I.Get<ApplicationViewModel>(); 
          }
       }

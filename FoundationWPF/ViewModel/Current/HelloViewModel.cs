@@ -1,5 +1,4 @@
 ﻿using FoundationWPF.Navigation;
-using FoundationWPF.Ninject;
 using System.Threading;
 
 namespace FoundationWPF.ViewModel {
@@ -11,10 +10,9 @@ namespace FoundationWPF.ViewModel {
 
       public string Name { get; set; }
 
-      public HelloViewModel(ViewModelFoundation loadingVm) {
+      public HelloViewModel() {
          Name = "Hello World of Employés";
          IsPreLoadNeeded = true;
-         LoadingViewModel = loadingVm;
       }
 
       public ViewModelFoundation LoadingViewModel { get; set; }

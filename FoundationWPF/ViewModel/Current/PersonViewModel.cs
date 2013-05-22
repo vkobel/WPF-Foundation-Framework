@@ -21,9 +21,8 @@ namespace FoundationWPF.ViewModel {
    [Auth("TheMan")]
    class PersonCollectionViewModel : ViewModelCollection<Person, PersonViewModel> {
 
-      public PersonCollectionViewModel(ViewModelFoundation loadingVm) : base() {
+      public PersonCollectionViewModel() : base() {
          //Filter(p => p.Id <= 2);
-         LoadingViewModel = loadingVm;
       }
 
       private ICommand sortCmd;

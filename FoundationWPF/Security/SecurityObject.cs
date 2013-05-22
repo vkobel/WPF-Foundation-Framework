@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FoundationWPF.Security {
 
    /// <summary>
-   /// Represent a security object by the Roles it holds. Usually, this type is binded (IoC) 
-   /// to only one singleton object representing the current user of the application.
+   /// Represent a security object by the Roles it holds.
    /// </summary>
    public abstract class SecurityObject {
 
@@ -17,6 +17,10 @@ namespace FoundationWPF.Security {
       /// Login initialization stuff, should populate the Roles property
       /// </summary>
       public abstract void Login();
+
+      public virtual async void AsyncLogin() {
+         await Task.Factory.StartNew(Login);
+      }
    
       public SecurityObject(){
          Roles = new List<string>();

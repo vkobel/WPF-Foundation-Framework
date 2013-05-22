@@ -24,6 +24,7 @@ namespace FoundationWPF.ViewModel {
 
       private List<NavigConfig> navStructure;
 
+      private ViewModelFoundation loadingViewModel;
       private ViewModelFoundation nowLoadingViewModel;
 
       #endregion
@@ -46,7 +47,7 @@ namespace FoundationWPF.ViewModel {
                      AsyncLoadViewModel(cvm);  // Launch asynchronous loading
                   else if(cvm.IsCurrentlyLoading) {           // If it's already loading 
                      nowLoadingViewModel = currentViewModel;  // Change the current loading VM
-                     currentViewModel = cvm.LoadingViewModel; // And display the loading view
+                     currentViewModel = loadingViewModel;     // And display the loading view
                   }
                }
                RaiseViewModelDisplayed(currentViewModel);
@@ -63,10 +64,10 @@ namespace FoundationWPF.ViewModel {
       private async void AsyncLoadViewModel(IPreLoadable vm) {
          vm.IsPreLoadNeeded = false;             // This ViewModel doesn't need loading anymore
          nowLoadingViewModel = currentViewModel; // Set the currently loading ViewModel
-         currentViewModel = vm.LoadingViewModel; // Display the loading view
+         currentViewModel = loadingViewModel;    // Display the loading view
 
          vm.IsCurrentlyLoading = true;
-         await Task.Factory.StartNew(() => vm.PreLoad()); // Launch the preloading in another task
+         await Task.Factory.StartNew(vm.PreLoad); // Launch the preloading in another task
          vm.IsCurrentlyLoading = false;
 
          // Check if the view is a ILoadingViewModel and if it's currently in a loading state
@@ -122,7 +123,9 @@ namespace FoundationWPF.ViewModel {
       /// </summary>
       /// <param name="mainViewModels">An array of the application's ViewModels (injected)</param>
       /// <param name="currentUser">The current user of the application (injected)</param>
-      public ApplicationViewModel(ViewModelFoundation[] mainViewModels) {
+      public ApplicationViewModel(ViewModelFoundation[] mainViewModels, ViewModelFoundation loadingVm) {
+
+         loadingViewModel = loadingVm;
 
          // Load navigation informations
          NavigConfigLoader.RegisterConfigurations(new RH(), new Emp(), new EmpDetails(),

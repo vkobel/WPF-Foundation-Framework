@@ -21,7 +21,6 @@
     </Window.Resources>
 
     <DockPanel LastChildFill="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-        
         <Border DockPanel.Dock="Top" BorderBrush="#AAAAAA" BorderThickness="0,0,0,2" Height="70">
             <ItemsControl ItemsSource="{Binding MainNavig}">
                 <ItemsControl.ItemTemplate>

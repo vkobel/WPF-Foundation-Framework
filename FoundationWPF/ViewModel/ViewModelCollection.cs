@@ -61,9 +61,7 @@ namespace FoundationWPF.ViewModel {
       }
 
       #region IPreLoadable stuff
-
-      public ViewModelFoundation LoadingViewModel { get; set; }
-
+      
       /// <summary>
       /// Must be overridden to perform all kind of long loading. It's used to know when to display a loading screen.
       /// </summary>

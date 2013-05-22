@@ -21,7 +21,7 @@ namespace FoundationData.GenericRepo {
 
       public Repository(DbContext ctx) {
          this.ctx = ctx;
-         
+
          /// Get the matching DbSet by searching the properties of the context
          entities = ctx.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public)
                                  .Single(p => p.PropertyType == typeof(DbSet<T>))
