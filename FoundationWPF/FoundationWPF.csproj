@@ -108,15 +108,18 @@
     <Compile Include="ViewModel\Current\PersonViewModel.cs" />
     <Compile Include="ViewModel\DynamicProxy.cs" />
     <Compile Include="ViewModel\IPreLoadable.cs" />
-    <Compile Include="ViewModel\LoadingViewModel.cs" />
+    <Compile Include="ViewModel\StandardViewModels.cs" />
     <Compile Include="ViewModel\ViewModelFoundation.cs" />
     <Compile Include="ViewModel\ViewModelProxy.cs" />
     <Compile Include="ViewModel\ViewModelCollection.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="View\EmailsView.xaml.cs">
+    <Compile Include="View\AuthenticationView.xaml.cs">
+      <DependentUpon>AuthenticationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Current\EmailsView.xaml.cs">
       <DependentUpon>EmailsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\HelloView.xaml.cs">
+    <Compile Include="View\Current\HelloView.xaml.cs">
       <DependentUpon>HelloView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoadingView.xaml.cs">
@@ -134,11 +137,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\EmailsView.xaml">
+    <Page Include="View\AuthenticationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\HelloView.xaml">
+    <Page Include="View\Current\EmailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Current\HelloView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

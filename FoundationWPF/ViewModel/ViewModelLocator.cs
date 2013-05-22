@@ -20,11 +20,7 @@ namespace FoundationWPF.ViewModel {
    public class ViewModelLocator {
 
       public ApplicationViewModel Main {
-         get {
-            // Login current user
-            Nj.I.Get<CurrentUser>().AsyncLogin();
-            return Nj.I.Get<ApplicationViewModel>(); 
-         }
+         get { return Nj.I.Get<ApplicationViewModel>(); }
       }
 
       public static void Cleanup() {

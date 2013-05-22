@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using GalaSoft.MvvmLight;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using System;
 
 namespace FoundationWPF.Security {
 
@@ -7,6 +9,8 @@ namespace FoundationWPF.Security {
    /// Represent a security object by the Roles it holds.
    /// </summary>
    public abstract class SecurityObject {
+
+      public event EventHandler AsyncLoadingFinished;
 
       /// <summary>
       /// List of string that contains the roles associated with this SecurityObject
@@ -20,6 +24,7 @@ namespace FoundationWPF.Security {
 
       public virtual async void AsyncLogin() {
          await Task.Factory.StartNew(Login);
+         AsyncLoadingFinished(this, EventArgs.Empty);
       }
    
       public SecurityObject(){

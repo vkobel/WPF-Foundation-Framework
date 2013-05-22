@@ -8,6 +8,9 @@
         DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
 
     <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:AuthenticationViewModel}">
+            <v:AuthenticationView />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type vm:LoadingViewModel}">
             <v:LoadingView />
         </DataTemplate>

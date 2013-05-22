@@ -105,7 +105,9 @@ namespace FoundationWPF.ViewModel {
       /// List of current sub-viewmodels or if there is no subVMs return the VM of the MainNavig
       public List<NavigConfig> SubNavig {
          get {
-            if(CurrentMainNav.SubConfig.Count > 0)
+            if(CurrentMainNav == null)
+               return new List<NavigConfig>();
+            else if(CurrentMainNav.SubConfig.Count > 0)
                return (from elem in CurrentMainNav.SubConfig
                        where elem.Enabled
                        orderby elem.Position
@@ -117,26 +119,39 @@ namespace FoundationWPF.ViewModel {
 
       #endregion
 
-      // ctor: injection of all registred viewmodels (in MainViewModelsModule.cs)
       /// <summary>
       /// Instanciate the ApplicationViewModel. All registred ViewModels are injected into the param mainViewModels
       /// </summary>
       /// <param name="mainViewModels">An array of the application's ViewModels (injected)</param>
-      /// <param name="currentUser">The current user of the application (injected)</param>
-      public ApplicationViewModel(ViewModelFoundation[] mainViewModels, ViewModelFoundation loadingVm) {
+      /// <param name="loadingVm">The ViewModel representing the loading (injected)</param>
+      public ApplicationViewModel(ViewModelFoundation[] mainViewModels, ViewModelFoundation loadingVm, ViewModelFoundation authVm) {
 
          loadingViewModel = loadingVm;
+         CurrentUser.AsyncLoadingFinished += (s, a) => {
+            LoadNavigation(mainViewModels);
+            RaisePropertyChanged("MainNavig");
+         };
+
+         CurrentViewModel = authVm;
+         CurrentUser.AsyncLogin();
 
          // Load navigation informations
          NavigConfigLoader.RegisterConfigurations(new RH(), new Emp(), new EmpDetails(),
                                                   new TS(), new Agenda());
-         navStructure = new List<NavigConfig>();
+         navStructure = new List<NavigConfig>();       
+      }
+
+      /// <summary>
+      /// Create the navigation structure containing all ViewModels
+      /// </summary>
+      /// <param name="mainViewModels">An array of the application's ViewModels</param>
+      public void LoadNavigation(ViewModelFoundation[] mainViewModels) {
 
          // Browse every ViewModels and search if it has a Navig attribute
          foreach(var vm in mainViewModels) {
             foreach(NavigAttribute na in vm.GetType().GetCustomAttributes(typeof(NavigAttribute), inherit: false)) {
                NavigConfig mainConf;
-                  
+
                // Check if it already exists a NavigConf with the same name
                var existingMainConf = navStructure.SingleOrDefault(n => n.Name == na.MainConfig.Name);
 
@@ -151,7 +166,7 @@ namespace FoundationWPF.ViewModel {
 
                // Assign the VM to the SubConfig or the main (if NavigAttribute has a single param)
                if(na.SubConfig != null) {
-                  if(!IsAuthorized(vm.GetType(), CurrentUser)) 
+                  if(!IsAuthorized(vm.GetType(), CurrentUser))
                      na.SubConfig.Enabled = false;
                   na.SubConfig.VM = vm;
                   mainConf.SubConfig.Add(na.SubConfig);
