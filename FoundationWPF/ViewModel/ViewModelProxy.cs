@@ -29,7 +29,6 @@ namespace FoundationWPF.ViewModel {
       // Alert the ViewModelFoundation if a property has changed and persist the data
       private void DynamicViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e) {
          RaisePropertyChanged(e.PropertyName);
-         
          repo.Persist(); // AsyncPersist isn't that good huh ?
       }
    }

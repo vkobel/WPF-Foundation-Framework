@@ -91,8 +91,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ExtensionMethods\GenericMethods.cs" />
-    <Compile Include="Navigation\Config\RessourcesHumaines.cs" />
-    <Compile Include="Navigation\Config\Timesheet.cs" />
+    <Compile Include="Navigation\Current\RessourcesHumaines.cs" />
+    <Compile Include="Navigation\Current\Timesheet.cs" />
     <Compile Include="Navigation\NavigConfig.cs" />
     <Compile Include="Navigation\NavigAttribute.cs" />
     <Compile Include="Navigation\NavigConfigLoader.cs" />

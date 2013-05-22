@@ -12,8 +12,8 @@ namespace FoundationWPF.Ninject {
    /// Singleton object to access the Ninject's kernel
    /// </summary>
    public class Nj {
-      
-      private static Nj instance;
+
+      private static readonly Lazy<Nj> instance = new Lazy<Nj>(() => new Nj());
       public IKernel Kernel { get; private set; }
 
       private Nj() {
@@ -23,11 +23,7 @@ namespace FoundationWPF.Ninject {
       }
 
       public static Nj I {
-         get {
-            if (instance == null)
-               instance = new Nj();
-            return instance;
-         }
+         get { return instance.Value; }
       }
 
       public T Get<T>(){

@@ -18,27 +18,16 @@ namespace FoundationWPF.ViewModel {
    public abstract class ViewModelCollection<TEntity, TViewModel> : ViewModelFoundation, IPreLoadable 
                                                                     where TEntity : class 
                                                                     where TViewModel : ViewModelProxy<TEntity> {
-
       private IEnumerable<TEntity> entites;
-      private ICollectionView collectionView;
-
       private IRepository<TEntity> repo { get; set; }
-
+      private Lazy<ICollectionView> collectionView;
       protected ObservableCollection<TViewModel> all { get; set; }
 
       /// <summary>
       /// Exposes all the entites as a ICollectionView, it is a lazy loaded property
       /// </summary>
       public ICollectionView CollectionView {
-         get {
-            if(collectionView == null) {
-               //Thread.Sleep(5000);
-               foreach(var ent in entites) // real loading of entites (previously lazily loaded)
-                  all.Add(Activator.CreateInstance(typeof(TViewModel), ent) as TViewModel);
-               collectionView = CollectionViewSource.GetDefaultView(all);
-            }
-            return collectionView;
-         }
+         get { return collectionView.Value; }
       }
 
       /// <summary>
@@ -50,6 +39,13 @@ namespace FoundationWPF.ViewModel {
          repo = Nj.I.Get<IRepository<TEntity>>();
          entites = repo.GetAllAsEnumerable(); // lazy loaded
          IsPreLoadNeeded = true;
+
+         // Lazy initialization of the collection view (real loading)
+         collectionView = new Lazy<ICollectionView>(() => {
+            foreach(var ent in entites) // real loading of entites (previously lazily loaded)
+               all.Add(Activator.CreateInstance(typeof(TViewModel), ent) as TViewModel);
+            return CollectionViewSource.GetDefaultView(all);
+         });
       }
 
       /// <summary>

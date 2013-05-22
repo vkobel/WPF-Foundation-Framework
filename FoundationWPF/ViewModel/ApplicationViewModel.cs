@@ -1,6 +1,7 @@
 using FoundationWPF.Navigation;
 using FoundationWPF.Navigation.Config;
 using GalaSoft.MvvmLight.Command;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,14 +17,11 @@ namespace FoundationWPF.ViewModel {
 
       #region private fields
 
-      private ICommand changeViewCmd;
-      private ICommand changeMainCmd;
-
-      private ViewModelFoundation currentViewModel;
+      private Lazy<ICommand> changeViewCmd;
+      private Lazy<ICommand> changeMainCmd;
       private NavigConfig currentMainNav;
-
-      private List<NavigConfig> navStructure;
-
+      private List<NavigConfig> navStructure = new List<NavigConfig>();
+      private ViewModelFoundation currentViewModel;
       private ViewModelFoundation loadingViewModel;
       private ViewModelFoundation nowLoadingViewModel;
 
@@ -105,8 +103,7 @@ namespace FoundationWPF.ViewModel {
       /// List of current sub-viewmodels or if there is no subVMs return the VM of the MainNavig
       public List<NavigConfig> SubNavig {
          get {
-            if(CurrentMainNav == null)
-               return new List<NavigConfig>();
+            if(CurrentMainNav == null) return new List<NavigConfig>();
             else if(CurrentMainNav.SubConfig.Count > 0)
                return (from elem in CurrentMainNav.SubConfig
                        where elem.Enabled
@@ -139,7 +136,9 @@ namespace FoundationWPF.ViewModel {
          // Load navigation informations
          NavigConfigLoader.RegisterConfigurations(new RH(), new Emp(), new EmpDetails(),
                                                   new TS(), new Agenda());
-         navStructure = new List<NavigConfig>();       
+
+         changeMainCmd = new Lazy<ICommand>(() => new RelayCommand<NavigConfig>(nc => CurrentMainNav = nc));
+         changeViewCmd = new Lazy<ICommand>(() => new RelayCommand<ViewModelFoundation>(vm => CurrentViewModel = vm));
       }
 
       /// <summary>
@@ -182,19 +181,11 @@ namespace FoundationWPF.ViewModel {
       #region Commands
 
       public ICommand ChangeMainCmd {
-         get {
-            if(changeMainCmd == null)
-               changeMainCmd = new RelayCommand<NavigConfig>(nc => CurrentMainNav = nc);
-            return changeMainCmd;
-         }
+         get { return changeMainCmd.Value; }
       }
 
       public ICommand ChangeViewCmd {
-         get {
-            if(changeViewCmd == null)
-               changeViewCmd = new RelayCommand<ViewModelFoundation>(vm => CurrentViewModel = vm);
-            return changeViewCmd;
-         }
+         get { return changeViewCmd.Value; }
       }
 
       #endregion
