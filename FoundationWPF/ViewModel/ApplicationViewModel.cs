@@ -126,7 +126,6 @@ namespace FoundationWPF.ViewModel {
       /// <param name="loadingVm">The ViewModel representing the loading (injected)</param>
       public ApplicationViewModel(ViewModelFoundation[] mainViewModels, ViewModelFoundation loadingVm, ViewModelFoundation authVm) {
 
-         loadingViewModel = loadingVm;
          CurrentUser.AsyncLoadingFinished += (s, a) => {
             LoadNavigation(mainViewModels);
             RaisePropertyChanged("MainNavig");
@@ -134,6 +133,8 @@ namespace FoundationWPF.ViewModel {
 
          CurrentViewModel = authVm;
          CurrentUser.AsyncLogin();
+
+         loadingViewModel = loadingVm;
 
          // Load navigation informations
          NavigConfigLoader.RegisterConfigurations(new RH(), new Emp(), new EmpDetails(),

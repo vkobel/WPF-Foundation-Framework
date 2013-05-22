@@ -17,6 +17,10 @@ namespace FoundationWPF.Security {
       /// </summary>
       public List<string> Roles { get; set; }
 
+      public SecurityObject() {
+         Roles = new List<string>();
+      }
+
       /// <summary>
       /// Login initialization stuff, should populate the Roles property
       /// </summary>
@@ -26,10 +30,5 @@ namespace FoundationWPF.Security {
          await Task.Factory.StartNew(Login);
          AsyncLoadingFinished(this, EventArgs.Empty);
       }
-   
-      public SecurityObject(){
-         Roles = new List<string>();
-      }
-
    }
 }

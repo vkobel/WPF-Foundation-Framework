@@ -23,15 +23,13 @@ namespace FoundationWPF.ViewModel {
          this.entity = entity;
          this.repo = Nj.I.Get<IRepository<TEntity>>();
          BindingData = new DynamicProxy(entity);
-         (BindingData as INotifyPropertyChanged).PropertyChanged += DynamicViewModel_PropertyChanged;
+         (BindingData as DynamicProxy).PropertyChanged += DynamicViewModel_PropertyChanged;
       }
 
       // Alert the ViewModelFoundation if a property has changed and persist the data
       private void DynamicViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e) {
          RaisePropertyChanged(e.PropertyName);
          
-         // ???????????????????????????????????????
-         // ???? Should add a condition ???????????
          repo.Persist(); // AsyncPersist isn't that good huh ?
       }
    }
