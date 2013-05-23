@@ -1,7 +1,7 @@
-KobiWPFFramework/bin/*
-KobiWPFFramework/obj/*
-KobiDataFramework/bin/*
-KobiDataFramework/obj/*
+FoundationWPF/bin/*
+FoundationWPF/obj/*
+FoundationData/bin/*
+FoundationData/obj/*
 packages/*
 
 # Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
