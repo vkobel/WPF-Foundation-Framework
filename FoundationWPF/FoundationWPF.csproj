@@ -91,8 +91,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ExtensionMethods\GenericMethods.cs" />
-    <Compile Include="Navigation\Current\RessourcesHumaines.cs" />
-    <Compile Include="Navigation\Current\Timesheet.cs" />
+    <Compile Include="Navigation\Example\RessourcesHumaines.cs" />
+    <Compile Include="Navigation\Example\Timesheet.cs" />
     <Compile Include="Navigation\NavigConfig.cs" />
     <Compile Include="Navigation\NavigAttribute.cs" />
     <Compile Include="Navigation\NavigConfigLoader.cs" />
@@ -103,9 +103,9 @@
     <Compile Include="Security\AuthAttribute.cs" />
     <Compile Include="Security\SecurityObject.cs" />
     <Compile Include="Security\CurrentUser.cs" />
-    <Compile Include="ViewModel\Current\HelloViewModel.cs" />
+    <Compile Include="ViewModel\Example\HelloViewModel.cs" />
     <Compile Include="ViewModel\ApplicationViewModel.cs" />
-    <Compile Include="ViewModel\Current\PersonViewModel.cs" />
+    <Compile Include="ViewModel\Example\PersonViewModel.cs" />
     <Compile Include="ViewModel\DynamicProxy.cs" />
     <Compile Include="ViewModel\IPreLoadable.cs" />
     <Compile Include="ViewModel\StandardViewModels.cs" />
@@ -116,10 +116,10 @@
     <Compile Include="View\AuthenticationView.xaml.cs">
       <DependentUpon>AuthenticationView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Current\EmailsView.xaml.cs">
+    <Compile Include="View\Example\EmailsView.xaml.cs">
       <DependentUpon>EmailsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Current\HelloView.xaml.cs">
+    <Compile Include="View\Example\HelloView.xaml.cs">
       <DependentUpon>HelloView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoadingView.xaml.cs">
@@ -141,11 +141,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Current\EmailsView.xaml">
+    <Page Include="View\Example\EmailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Current\HelloView.xaml">
+    <Page Include="View\Example\HelloView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
