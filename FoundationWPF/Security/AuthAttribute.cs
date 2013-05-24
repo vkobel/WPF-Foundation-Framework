@@ -7,7 +7,7 @@ namespace FoundationWPF.Security {
    /// Specifiy that a ViewModel uses authentication.
    /// </summary>
    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-   class AuthAttribute : Attribute {
+   public class AuthAttribute : Attribute {
 
       /// <summary>
       /// Roles that have to match against a SecurityObject

@@ -5,7 +5,7 @@ namespace FoundationWPF.DI.Modules {
    class SecurityModule : NinjectModule {
 
       public override void Load() {
-         Bind<CurrentUser>().ToSelf().InSingletonScope();
+         Bind<SecurityObject>().To<CurrentUser>().InSingletonScope();
       }
    }
 }

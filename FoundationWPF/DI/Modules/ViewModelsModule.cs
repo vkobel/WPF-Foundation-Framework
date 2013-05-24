@@ -16,6 +16,7 @@ namespace FoundationWPF.DI.Modules {
          /// ---------------------------------------
          Bind<ViewModelFoundation>().To<HelloViewModel>().InSingletonScope();
          Bind<ViewModelFoundation>().To<PersonCollectionViewModel>().InSingletonScope();
+         
       }
    }
 }

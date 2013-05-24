@@ -1,4 +1,6 @@
 FoundationWPFLibrary/*
+test*/*
+NuGet_files/*
 
 FoundationWPF/bin/*
 FoundationWPF/obj/*

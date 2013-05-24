@@ -16,7 +16,7 @@ namespace FoundationWPF.ViewModel {
 
       public ViewModelFoundation(){
 
-         CurrentUser = Injector.I.Get<CurrentUser>();
+         CurrentUser = Injector.I.Get<SecurityObject>();
 
          /// Default behavior: if the ViewModel is displayed without proper access rights 
          /// it throws an exception (for the final user, the program will crash).
