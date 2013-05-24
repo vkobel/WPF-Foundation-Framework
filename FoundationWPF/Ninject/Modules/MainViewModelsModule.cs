@@ -11,7 +11,9 @@ namespace FoundationWPF.Ninject.Modules {
          // Bind the Authentication ViewModel to any ViewModelFoundation variable that starts with "auth"
          Bind<ViewModelFoundation>().To<AuthenticationViewModel>().When(req => req.Target.Name.StartsWith("auth")).InSingletonScope();
 
-         // Register all ViewModels
+         /// ---------------------------------------
+         /// TODO : Register all custom ViewModels
+         /// ---------------------------------------
          Bind<ViewModelFoundation>().To<HelloViewModel>().InSingletonScope();
          Bind<ViewModelFoundation>().To<PersonCollectionViewModel>().InSingletonScope();
       }
