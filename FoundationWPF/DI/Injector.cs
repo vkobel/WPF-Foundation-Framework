@@ -1,12 +1,11 @@
-﻿using FoundationWPF.DI.Modules;
-using Ninject;
+﻿using Ninject;
 using Ninject.Modules;
 using System;
 
 namespace FoundationWPF.DI {
 
    /// <summary>
-   /// Singleton object to access the Ninject's kernel
+   /// Singleton wrapper to the dependency injection framework (here: Ninject)
    /// </summary>
    public class Injector {
 
@@ -14,10 +13,7 @@ namespace FoundationWPF.DI {
       protected IKernel Kernel { get; private set; }
 
       private Injector() {
-         Kernel = new StandardKernel(new SecurityModule(),
-                                     new RepositoriesModule(),
-                                     new ViewModelsModule(),
-                                     new NavigationModule());
+         Kernel = new StandardKernel();
       }
 
       public void LoadModules(params NinjectModule[] modules) {
