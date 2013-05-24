@@ -21,7 +21,7 @@ namespace FoundationWPF.ViewModel {
 
       public ViewModelProxy(TEntity entity) : base() {
          this.entity = entity;
-         this.repo = Nj.I.Get<IRepository<TEntity>>();
+         this.repo = Injector.I.Get<IRepository<TEntity>>();
          BindingData = new DynamicProxy(entity);
          (BindingData as DynamicProxy).PropertyChanged += DynamicViewModel_PropertyChanged;
       }

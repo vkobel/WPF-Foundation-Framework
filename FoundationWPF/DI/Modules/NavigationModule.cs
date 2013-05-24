@@ -1,5 +1,4 @@
 ﻿using FoundationWPF.Navigation;
-using FoundationWPF.Navigation.Config;
 using Ninject.Modules;
 
 namespace FoundationWPF.DI.Modules {

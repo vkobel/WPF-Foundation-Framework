@@ -1,29 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FoundationWPF.DI.Modules;
 using Ninject;
-using FoundationWPF.DI.Modules;
+using Ninject.Modules;
+using System;
 
 namespace FoundationWPF.DI {
 
    /// <summary>
    /// Singleton object to access the Ninject's kernel
    /// </summary>
-   public class Nj {
+   public class Injector {
 
-      private static readonly Lazy<Nj> instance = new Lazy<Nj>(() => new Nj());
-      public IKernel Kernel { get; private set; }
+      private static readonly Lazy<Injector> instance = new Lazy<Injector>(() => new Injector());
+      protected IKernel Kernel { get; private set; }
 
-      private Nj() {
+      private Injector() {
          Kernel = new StandardKernel(new SecurityModule(),
                                      new RepositoriesModule(),
                                      new ViewModelsModule(),
                                      new NavigationModule());
       }
 
-      public static Nj I {
+      public void LoadModules(params NinjectModule[] modules) {
+         Kernel.Load(modules);
+      }
+
+      public static Injector I {
          get { return instance.Value; }
       }
 

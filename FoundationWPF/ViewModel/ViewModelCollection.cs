@@ -36,7 +36,7 @@ namespace FoundationWPF.ViewModel {
       /// </summary>
       public ViewModelCollection() : base() {
          all = new ObservableCollection<TViewModel>();
-         repo = Nj.I.Get<IRepository<TEntity>>();
+         repo = Injector.I.Get<IRepository<TEntity>>();
          entites = repo.GetAllAsEnumerable(); // lazy loaded
          IsPreLoadNeeded = true;
 

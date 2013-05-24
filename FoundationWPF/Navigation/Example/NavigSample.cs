@@ -1,5 +1,5 @@
 ﻿
-namespace FoundationWPF.Navigation.Config {
+namespace FoundationWPF.Navigation {
    class RH : NavigConfig {
       public RH() : base("HR", 0, true, "Information about HR", "") { }
    }

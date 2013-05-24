@@ -1,5 +1,4 @@
 using FoundationWPF.Navigation;
-using FoundationWPF.Navigation.Config;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;

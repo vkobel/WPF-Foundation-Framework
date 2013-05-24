@@ -99,7 +99,7 @@
     <Compile Include="DI\Modules\ViewModelsModule.cs" />
     <Compile Include="DI\Modules\RepositoriesModule.cs" />
     <Compile Include="DI\Modules\SecurityModule.cs" />
-    <Compile Include="DI\Nj.cs" />
+    <Compile Include="DI\Injector.cs" />
     <Compile Include="Security\AuthAttribute.cs" />
     <Compile Include="Security\SecurityObject.cs" />
     <Compile Include="Security\CurrentUser.cs" />

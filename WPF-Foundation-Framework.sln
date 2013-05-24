@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoundationData", "Foundatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoundationWPFLibrary", "FoundationWPFLibrary\FoundationWPFLibrary.csproj", "{88273372-E0A6-4237-96E0-15289E37CC71}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WFFPackage", "WFFPackage\WFFPackage.csproj", "{07B827E0-DBA2-415E-B539-DA8B39B41F19}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{88273372-E0A6-4237-96E0-15289E37CC71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88273372-E0A6-4237-96E0-15289E37CC71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88273372-E0A6-4237-96E0-15289E37CC71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07B827E0-DBA2-415E-B539-DA8B39B41F19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07B827E0-DBA2-415E-B539-DA8B39B41F19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07B827E0-DBA2-415E-B539-DA8B39B41F19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07B827E0-DBA2-415E-B539-DA8B39B41F19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

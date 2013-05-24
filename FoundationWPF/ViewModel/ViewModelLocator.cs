@@ -20,7 +20,7 @@ namespace FoundationWPF.ViewModel {
    public class ViewModelLocator {
 
       public ApplicationViewModel Main {
-         get { return Nj.I.Get<ApplicationViewModel>(); }
+         get { return Injector.I.Get<ApplicationViewModel>(); }
       }
 
       public static void Cleanup() {
