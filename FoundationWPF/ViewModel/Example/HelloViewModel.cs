@@ -3,8 +3,8 @@ using System.Threading;
 
 namespace FoundationWPF.ViewModel {
 
-   [Navig("Ressources Humaines", "Employés")]
-   [Navig("Ressources Humaines", "Employés détails")]
+   [Navig("HR", "Hello")]
+   [Navig("HR", "World")]
    //[Auth("TheMan")]
    public class HelloViewModel : ViewModelFoundation { //, IPreLoadable { 
 

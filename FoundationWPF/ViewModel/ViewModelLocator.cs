@@ -8,7 +8,7 @@
   In the View:
   DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
 */
-using FoundationWPF.Ninject;
+using FoundationWPF.DI;
 using FoundationWPF.Security;
 
 namespace FoundationWPF.ViewModel {

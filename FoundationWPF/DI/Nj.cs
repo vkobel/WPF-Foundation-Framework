@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ninject;
-using FoundationWPF.Ninject.Modules;
+using FoundationWPF.DI.Modules;
 
-namespace FoundationWPF.Ninject {
+namespace FoundationWPF.DI {
 
    /// <summary>
    /// Singleton object to access the Ninject's kernel
@@ -19,7 +19,8 @@ namespace FoundationWPF.Ninject {
       private Nj() {
          Kernel = new StandardKernel(new SecurityModule(),
                                      new RepositoriesModule(),
-                                     new MainViewModelsModule());
+                                     new ViewModelsModule(),
+                                     new NavigationModule());
       }
 
       public static Nj I {

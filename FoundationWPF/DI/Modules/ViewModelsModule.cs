@@ -1,8 +1,8 @@
 ﻿using FoundationWPF.ViewModel;
 using Ninject.Modules;
 
-namespace FoundationWPF.Ninject.Modules {
-   class MainViewModelsModule : NinjectModule {
+namespace FoundationWPF.DI.Modules {
+   class ViewModelsModule : NinjectModule {
 
       public override void Load() {
 

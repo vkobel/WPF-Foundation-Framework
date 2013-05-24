@@ -69,8 +69,8 @@
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GenericRepo\IRepository.cs" />
-    <Compile Include="GenericRepo\Repository.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="DataModel.edmx">

@@ -1,5 +1,5 @@
 ﻿using FoundationData.GenericRepo;
-using FoundationWPF.Ninject;
+using FoundationWPF.DI;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

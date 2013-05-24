@@ -121,7 +121,9 @@ namespace FoundationWPF.ViewModel {
       /// </summary>
       /// <param name="mainViewModels">An array of the application's ViewModels (injected)</param>
       /// <param name="loadingVm">The ViewModel representing the loading (injected)</param>
-      public ApplicationViewModel(ViewModelFoundation[] mainViewModels, ViewModelFoundation loadingVm, ViewModelFoundation authVm) {
+      /// <param name="authVm">The ViewModel representing the authentication (injected)</param>
+      /// <param name="navConfs">An array containing the navigation configuration (injected)</param>
+      public ApplicationViewModel(ViewModelFoundation[] mainViewModels, ViewModelFoundation loadingVm, ViewModelFoundation authVm, NavigConfig[] navConfs) {
 
          // Set the callback when the CurrentUser object has finished loading
          CurrentUser.AsyncLoadingFinished += (s, a) => {
@@ -134,7 +136,7 @@ namespace FoundationWPF.ViewModel {
          loadingViewModel = loadingVm;
 
          // Load navigation informations
-         NavigConfigLoader.RegisterConfigurations(new RH(), new Emp(), new EmpDetails(), new TS(), new Agenda());
+         NavigConfigLoader.RegisterConfigurations(navConfs);
 
          changeMainCmd = new Lazy<ICommand>(() => new RelayCommand<NavigConfig>(nc => CurrentMainNav = nc));
          changeViewCmd = new Lazy<ICommand>(() => new RelayCommand<ViewModelFoundation>(vm => CurrentViewModel = vm));

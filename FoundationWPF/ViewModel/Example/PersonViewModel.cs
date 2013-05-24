@@ -17,8 +17,8 @@ namespace FoundationWPF.ViewModel {
       }
    }
 
-   [Navig("Ressources Humaines", "Persons")]
-   [Navig("Ventes", "Tableau")]
+   [Navig("HR", "Persons")]
+   [Navig("Clients", "Internal")]
    [Auth("TheMan")]
    class PersonCollectionViewModel : ViewModelCollection<Person, PersonViewModel> {
 

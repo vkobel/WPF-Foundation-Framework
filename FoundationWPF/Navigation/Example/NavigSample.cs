@@ -1,12 +1,17 @@
 ﻿
 namespace FoundationWPF.Navigation.Config {
    class RH : NavigConfig {
-      public RH() : base("Ressources Humaines", 0, true, "Informations sur tous les employés", "") { }
+      public RH() : base("HR", 0, true, "Information about HR", "") { }
    }
-   class Emp : NavigConfig {
-      public Emp() : base("Employés", 0, true, "Informations sur tous les employés", "") { }
+
+   class Persons : NavigConfig {
+      public Persons() : base("Persons", 1, true, "Persons collection", "") { }
    }
-   class EmpDetails : NavigConfig {
-      public EmpDetails() : base("Persons", 1, true, "Some good stuff", "") { }
+
+   class Hello : NavigConfig {
+      public Hello() : base("Hello", 2, true, "Hello stuff", "") { }
+   }
+   class World : NavigConfig {
+      public World() : base("World", 0, true, "Some good stuff", "") { }
    }
 }

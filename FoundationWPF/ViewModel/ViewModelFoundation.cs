@@ -1,4 +1,4 @@
-﻿using FoundationWPF.Ninject;
+﻿using FoundationWPF.DI;
 using FoundationWPF.Security;
 using GalaSoft.MvvmLight;
 using System;

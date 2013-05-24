@@ -3,7 +3,7 @@ using FoundationData.GenericRepo;
 using Ninject.Modules;
 using System.Data.Entity;
 
-namespace FoundationWPF.Ninject.Modules {
+namespace FoundationWPF.DI.Modules {
    class RepositoriesModule : NinjectModule {
 
       public override void Load() {
