@@ -16,7 +16,7 @@ namespace FoundationWPF.Security {
       public override void Login() {
          // Login stuff
 
-         Thread.Sleep(4000);
+         Thread.Sleep(1000);
          Roles.Add("TheMan");
          Name = "Vincent Kobel";
       }

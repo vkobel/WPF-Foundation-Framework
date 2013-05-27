@@ -12,6 +12,7 @@ namespace FoundationData.GenericRepo {
       IEnumerable<T> GetAllAsEnumerable();
       IQueryable<T> Query(Expression<Func<T, bool>> predicate);
       T GetSingle(Expression<Func<T, bool>> predicate);
+      object GetReloadedProperty(T entity, string property);
 
       void Create(T entity);
       void Add(T entity);

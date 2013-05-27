@@ -42,6 +42,12 @@ namespace FoundationData.GenericRepo {
          return entities.Where(predicate);
       }
 
+      public object GetReloadedProperty(T entity, string property) {
+         var dbEntry = ctx.Entry<T>(entity);
+         dbEntry.Reload();
+         return dbEntry.Entity.GetType().GetProperty(property).GetValue(dbEntry.Entity);
+      }
+
       public T GetSingle(Expression<Func<T, bool>> predicate) {
          return entities.SingleOrDefault(predicate);
       }
@@ -84,6 +90,6 @@ namespace FoundationData.GenericRepo {
          Dispose(true);
          GC.SuppressFinalize(this);
       }
-   
+
    }
 }

@@ -10,6 +10,23 @@ namespace FoundationWPF.ViewModel {
    using PropDep = List<Tuple<string, string>>;
 
    /// <summary>
+   /// Simple extended class to represent a changing property with additional params (oldVal, newVal, ...)
+   /// </summary>
+   public class FoundationPropertyChangingEventArgs : EventArgs {
+      public virtual string PropertyName { get; private set; }
+      public virtual object Entity { get; private set; }
+      public virtual object OldValue { get; private set; }
+      public virtual object NewValue { get; private set; }
+
+      public FoundationPropertyChangingEventArgs(string propertyName, object entity, object oldValue, object newValue) {
+         PropertyName = propertyName;
+         Entity = entity;
+         OldValue = oldValue;
+         NewValue = newValue;
+      }
+   }
+
+   /// <summary>
    /// Dynamic proxy class used to access multiple objects properties by a single proxy.
    /// i.e. extend a model object with custom properties of a viewmodel. It implements the interface INotifyPropertyChanged.
    /// </summary>
@@ -22,6 +39,9 @@ namespace FoundationWPF.ViewModel {
       /// Subscribe to this to know when a property has changed into the proxy.
       /// </summary>
       public event PropertyChangedEventHandler PropertyChanged;
+
+      public event FoundationPropertyChangingEventHandler PropertyChanging;
+      public delegate bool FoundationPropertyChangingEventHandler(object sender, FoundationPropertyChangingEventArgs e);
 
       /// <summary>
       /// Create a new instance of the proxy
@@ -58,7 +78,13 @@ namespace FoundationWPF.ViewModel {
       }
 
       public override bool TrySetMember(SetMemberBinder binder, object value) {
-         proxiedObjs.SetFirstMatchingPropertyValue(binder.Name, value);
+         var allowed = PropertyChanging(this, new FoundationPropertyChangingEventArgs(binder.Name,
+                                                                                      proxiedObjs.GetFirstWithProperty(binder.Name),
+                                                                                      proxiedObjs.GetFirstMatchingPropertyValue(binder.Name),
+                                                                                      value));
+         if(allowed)
+            proxiedObjs.SetFirstMatchingPropertyValue(binder.Name, value);
+         
          PropertyChanged(this, new PropertyChangedEventArgs(binder.Name));
          // Raise dependency properties notifications
          foreach(var prop in propDependencies.Where(p => p.Item1 == binder.Name))
