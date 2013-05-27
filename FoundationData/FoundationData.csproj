@@ -65,6 +65,8 @@
     <Compile Include="Email.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="IIndexer.cs" />
+    <Compile Include="Model\Person.cs" />
     <Compile Include="Person.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>

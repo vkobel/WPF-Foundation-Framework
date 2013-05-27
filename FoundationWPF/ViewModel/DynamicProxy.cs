@@ -7,7 +7,8 @@ using System.Linq;
 
 namespace FoundationWPF.ViewModel {
 
-   using PropDep = List<Tuple<string, string>>;
+   using FoundationData;
+   using PropList = List<Tuple<string, string>>;
 
    /// <summary>
    /// Simple extended class to represent a changing property with additional params (oldVal, newVal, ...)
@@ -30,10 +31,10 @@ namespace FoundationWPF.ViewModel {
    /// Dynamic proxy class used to access multiple objects properties by a single proxy.
    /// i.e. extend a model object with custom properties of a viewmodel. It implements the interface INotifyPropertyChanged.
    /// </summary>
-   public class DynamicProxy : DynamicObject, INotifyPropertyChanged {
+   public class DynamicProxy : DynamicObject, INotifyPropertyChanged, IDataErrorInfo {
 
       private List<object> proxiedObjs;
-      private PropDep propDependencies;
+      private PropList propDependencies;
 
       /// <summary>
       /// Subscribe to this to know when a property has changed into the proxy.
@@ -49,7 +50,7 @@ namespace FoundationWPF.ViewModel {
       /// <param name="proxiedObjects">objects you want to be proxied</param>
       public DynamicProxy(params object[] proxiedObjects) {
          proxiedObjs = new List<object>(proxiedObjects);
-         propDependencies = new PropDep();
+         propDependencies = new PropList();
       }
 
       /// <summary>
@@ -71,12 +72,18 @@ namespace FoundationWPF.ViewModel {
          foreach(var p in dependsOn)
             propDependencies.Add(new Tuple<string,string>(p, propName));
       }
-
+      
+      /// <summary>
+      /// Called when a member (property) is called
+      /// </summary>
       public override bool TryGetMember(GetMemberBinder binder, out object result) {
          result = proxiedObjs.GetFirstMatchingPropertyValue(binder.Name);
          return result != null;
       }
 
+      /// <summary>
+      /// Called when a member (property) is setted
+      /// </summary>
       public override bool TrySetMember(SetMemberBinder binder, object value) {
          var allowed = PropertyChanging(this, new FoundationPropertyChangingEventArgs(binder.Name,
                                                                                       proxiedObjs.GetFirstWithProperty(binder.Name),
@@ -90,6 +97,24 @@ namespace FoundationWPF.ViewModel {
          foreach(var prop in propDependencies.Where(p => p.Item1 == binder.Name))
             PropertyChanged(this, new PropertyChangedEventArgs(prop.Item2));
          return true;
+      }
+
+      public string Error {
+         get { throw new NotImplementedException(); }
+      }
+
+      /// <summary>
+      /// Enable the support of IDataErrorInfo on the DynamicProxy
+      /// Since it's a proxy it simply forward the indexer to the model object
+      /// </summary>
+      string IDataErrorInfo.this[string columnName] {
+         get {
+            var entity = proxiedObjs.GetFirstWithProperty(columnName);
+            if(entity is FoundationData.IIndexer<string>)
+               return (string)(entity as FoundationData.IIndexer<string>)[columnName];
+            else
+               return null;
+         }
       }
    }
 }

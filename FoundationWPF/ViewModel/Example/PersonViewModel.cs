@@ -4,6 +4,7 @@ using FoundationWPF.Security;
 using GalaSoft.MvvmLight.Command;
 using System.ComponentModel;
 using System.Windows.Input;
+using System.Linq;
 
 namespace FoundationWPF.ViewModel {
    class PersonViewModel : ViewModelProxy<Person> {
@@ -23,7 +24,7 @@ namespace FoundationWPF.ViewModel {
    class PersonCollectionViewModel : ViewModelCollection<Person, PersonViewModel> {
 
       public PersonCollectionViewModel() : base() {
-         //Filter(p => p.Id <= 2);
+         // Filter(p => p.Id <= 2);
       }
 
       private ICommand sortCmd;

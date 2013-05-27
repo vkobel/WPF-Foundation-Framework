@@ -22,11 +22,11 @@
         <StackPanel DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="10,0">
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock HorizontalAlignment="Left" FontSize="10pt" Text="Nom: " />
-                <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="24" Text="{Binding CollectionView/BindingData.Lastname}" />
+                <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="24" Text="{Binding CollectionView/BindingData.Lastname, ValidatesOnDataErrors=True}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock DockPanel.Dock="Left" HorizontalAlignment="Left" FontSize="10pt" Text="Prénom: " />
-                <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="24" Text="{Binding CollectionView/BindingData.Firstname}" />
+                <TextBox DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="24" Text="{Binding CollectionView/BindingData.Firstname, ValidatesOnDataErrors=True}" />
             </StackPanel>
             <StackPanel Orientation="Vertical">
                 <TextBlock DockPanel.Dock="Left" HorizontalAlignment="Left" FontSize="10pt" Text="Emails: " />

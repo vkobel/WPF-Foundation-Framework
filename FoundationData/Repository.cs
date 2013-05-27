@@ -50,7 +50,8 @@ namespace FoundationData.GenericRepo {
       /// <returns>Returns the updated property on the specified entity</returns>
       public object GetReloadedProperty(T entity, string property) {
          var dbEntry = ctx.Entry<T>(entity);
-         dbEntry.Reload();
+         if(dbEntry.State != System.Data.EntityState.Detached)
+            dbEntry.Reload();
          return dbEntry.Entity.GetType().GetProperty(property).GetValue(dbEntry.Entity);
       }
 
