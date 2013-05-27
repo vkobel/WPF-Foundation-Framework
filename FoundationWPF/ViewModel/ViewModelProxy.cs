@@ -29,15 +29,17 @@ namespace FoundationWPF.ViewModel {
          (BindingData as DynamicProxy).PropertyChanging += ViewModelProxy_PropertyChanging;
       }
       
+      /// <summary>
+      /// Check if the changing property has already been changed by someone else, and prompt for the required action
+      /// </summary>
+      /// <returns>true, if the value will be replaced by the user's one. False if the database value wins</returns>
       private bool ViewModelProxy_PropertyChanging(object sender, FoundationPropertyChangingEventArgs e) {
 
-         if(e.OldValue != e.NewValue){
-            var newValue = e.NewValue;
-            var oldValue = e.OldValue;
+         if(e.OldValue != e.NewValue){ // if the value has been update
             var updatedValue = repo.GetReloadedProperty(e.Entity as TEntity, e.PropertyName);
 
-            if(!oldValue.Equals(updatedValue) && !newValue.Equals(updatedValue)) {
-               string msg = string.Format("This field has a more recent value: '{0}'\nDo you want to replace your value '{1}' by '{0}' ?", updatedValue, newValue);
+            if(!e.OldValue.Equals(updatedValue) && !e.NewValue.Equals(updatedValue)) {
+               string msg = string.Format("This field has a more recent value: '{0}'\nDo you want to replace your value '{1}' by '{0}' ?", updatedValue, e.NewValue);
                return DialogResult.No == MessageBox.Show(msg, "Recent update notification", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
             }
          }

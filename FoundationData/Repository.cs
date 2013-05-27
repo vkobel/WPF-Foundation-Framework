@@ -42,6 +42,12 @@ namespace FoundationData.GenericRepo {
          return entities.Where(predicate);
       }
 
+      /// <summary>
+      /// Reloads the entity from the database and returns the specified property
+      /// </summary>
+      /// <param name="entity">The entity that need to be reloaded</param>
+      /// <param name="property">The property to be returned</param>
+      /// <returns>Returns the updated property on the specified entity</returns>
       public object GetReloadedProperty(T entity, string property) {
          var dbEntry = ctx.Entry<T>(entity);
          dbEntry.Reload();
