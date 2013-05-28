@@ -34,6 +34,7 @@ namespace FoundationWPF.ViewModel {
    public class DynamicProxy : DynamicObject, INotifyPropertyChanged, IDataErrorInfo {
 
       private List<object> proxiedObjs;
+      // format: <real, dependency>
       private PropList propDependencies;
 
       /// <summary>
@@ -85,30 +86,45 @@ namespace FoundationWPF.ViewModel {
       /// Called when a member (property) is setted
       /// </summary>
       public override bool TrySetMember(SetMemberBinder binder, object value) {
-         var allowed = PropertyChanging(this, new FoundationPropertyChangingEventArgs(binder.Name,
+         var modificationAllowed = PropertyChanging(this, new FoundationPropertyChangingEventArgs(binder.Name,
                                                                                       proxiedObjs.GetFirstWithProperty(binder.Name),
                                                                                       proxiedObjs.GetFirstMatchingPropertyValue(binder.Name),
                                                                                       value));
-         if(allowed)
+         if(modificationAllowed)
             proxiedObjs.SetFirstMatchingPropertyValue(binder.Name, value);
          
+         //
+
          PropertyChanged(this, new PropertyChangedEventArgs(binder.Name));
+         
          // Raise dependency properties notifications
          foreach(var prop in propDependencies.Where(p => p.Item1 == binder.Name))
             PropertyChanged(this, new PropertyChangedEventArgs(prop.Item2));
          return true;
       }
 
-      private Dictionary<string, string> errors = new Dictionary<string, string>();
+      /// <summary>
+      /// Get the dependencies a property depends on
+      /// </summary>
+      /// <param name="prop">The property to be checked against the dependencies</param>
+      /// <returns>A list of dependencies names</returns>
+      public List<string> GetDependencies(string prop) {
+         return (from dep in propDependencies
+                 where dep.Item2 == prop
+                 select dep.Item1).ToList();
+      }
 
-      public bool HasErrors {
-         get { return errors.Count > 0; }
+      /// <summary>
+      /// Check if the parameter has a dependency or not
+      /// </summary>
+      /// <param name="prop">The property to be checked against the dependencies</param>
+      /// <returns>True, if it's a dependency, otherwise false</returns>
+      public bool HasDependency(string prop) {
+         return propDependencies.Exists(p => p.Item2 == prop);
       }
 
       public string Error {
-         get {
-            return string.Join("\n", errors.Select(e => e.Key + ": " + e.Value + "\n"));
-         }
+         get { throw new NotImplementedException(); }
       }
 
       /// <summary>
@@ -118,21 +134,9 @@ namespace FoundationWPF.ViewModel {
       string IDataErrorInfo.this[string columnName] {
          get {
             var entity = proxiedObjs.GetFirstWithProperty(columnName);
-            // check if the entity implements the IDataErrorInfo interface
-            if(entity != null && entity is IDataErrorInfo) {
-               //var err = (string)(entity as IDataErrorInfo)[columnName];
+            if(entity != null && entity is IDataErrorInfo) // check if the entity implements the IDataErrorInfo interface
                return (string)(entity as IDataErrorInfo)[columnName];
-               
-               /*
-               if(!string.IsNullOrEmpty(err)) {
-                  //errors.Add(columnName, err);
-                  return err;
-               }else{
-                  //errors.Remove(columnName);
-                  return null;
-               }
-               */ 
-            } else
+            else
                return null;
          }
       }

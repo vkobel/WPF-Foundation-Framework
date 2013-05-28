@@ -1,7 +1,9 @@
 ﻿using FoundationData.GenericRepo;
 using FoundationWPF.DI;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace FoundationWPF.ViewModel {
 
@@ -21,12 +23,18 @@ namespace FoundationWPF.ViewModel {
       /// </summary>
       public dynamic BindingData { get; set; }
 
+      /// <summary>
+      /// Simple typed alias for the dynamic object BindingData
+      /// </summary>
+      private DynamicProxy bindingData;
+
       public ViewModelProxy(TEntity entity) : base() {
          this.entity = entity;
          this.repo = Injector.I.Get<IRepository<TEntity>>();
          BindingData = new DynamicProxy(entity);
-         (BindingData as DynamicProxy).PropertyChanged += DynamicViewModel_PropertyChanged;
-         (BindingData as DynamicProxy).PropertyChanging += ViewModelProxy_PropertyChanging;
+         bindingData = BindingData;
+         bindingData.PropertyChanged += DynamicViewModel_PropertyChanged;
+         bindingData.PropertyChanging += ViewModelProxy_PropertyChanging;
       }
       
       /// <summary>
@@ -39,8 +47,8 @@ namespace FoundationWPF.ViewModel {
             var updatedValue = repo.GetReloadedProperty(e.Entity as TEntity, e.PropertyName);
 
             if(!e.OldValue.Equals(updatedValue) && !e.NewValue.Equals(updatedValue)) {
-               string msg = string.Format("This field has a more recent value: '{0}'\nDo you want to replace your value '{1}' by '{0}' ?", updatedValue, e.NewValue);
-               return DialogResult.No == MessageBox.Show(msg, "Recent update notification", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+               string msg = string.Format("This field has a more recent value: '{0}'\nDo you want to replace this value ({0}) by yours ({1}) ?", updatedValue, e.NewValue);
+               return DialogResult.Yes == MessageBox.Show(msg, "Recent update notification", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
             }
          }
          return true;
@@ -48,8 +56,12 @@ namespace FoundationWPF.ViewModel {
 
       // Alert the ViewModelFoundation if a property has changed and persist the data
       private void DynamicViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e) {
-         RaisePropertyChanged(e.PropertyName);
-         repo.Persist(); // AsyncPersist isn't that good huh ?
+
+         if(!bindingData.HasDependency(e.PropertyName)) {                             // Is not a dependency property
+            if(string.IsNullOrEmpty((bindingData as IDataErrorInfo)[e.PropertyName])) // Explicit error checking: does not have any error
+               repo.Persist();
+
+         }
       }
    }
 }
