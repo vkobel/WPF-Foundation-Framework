@@ -68,7 +68,7 @@ namespace FoundationWPF.ViewModel {
          vm.IsCurrentlyLoading = false;
 
          // Check if the view is a ILoadingViewModel and if it's currently in a loading state
-         if(!(nowLoadingViewModel as IPreLoadable).IsCurrentlyLoading) {
+         if(nowLoadingViewModel != null && !(nowLoadingViewModel as IPreLoadable).IsCurrentlyLoading) {
             currentViewModel = nowLoadingViewModel; // Replace the loading by the freshly loaded ViewModel
             nowLoadingViewModel = null;
             RaiseViewModelDisplayed(currentViewModel);

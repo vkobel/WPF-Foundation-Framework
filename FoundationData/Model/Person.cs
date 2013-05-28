@@ -1,30 +1,28 @@
-﻿
+﻿using System.ComponentModel;
+using System.Text;
+
 namespace FoundationData {
-   public partial class Person : IIndexer<string> {
+   public partial class Person : IDataErrorInfo {
 
-      // ***********************************
-      // ***********************************
-      //      IMPLEMENT IDataErrorInfo
-      //    Do not persist or raisePropChanged
-      //      if there are any errors
-      // ***********************************
-      // ***********************************
+      public string Error {
+         get { throw new System.NotImplementedException(); }
+      }
 
-      object IIndexer<string>.this[string colname] {
+      string IDataErrorInfo.this[string columnName] {
          get {
-            string result = null;
-            switch(colname) {
-               case "Firstname":
-                  if(string.IsNullOrEmpty(Firstname))
-                     result = "Firstname cannot be empty";
-                  break;
-               case "Lastname":
-                  if(string.IsNullOrEmpty(Lastname))
-                     result = "Lastname cannot be empty";
-                  break;
+            var result = new StringBuilder();
+
+            if(string.IsNullOrEmpty(columnName) || columnName == "Firstname") {
+               if(string.IsNullOrEmpty(Firstname))
+                  result.Append("Firstname cannot be empty");
+
+            } else if(string.IsNullOrEmpty(columnName) || columnName == "Lastname") {
+               if(string.IsNullOrEmpty(Lastname))
+                   result.Append("Lastname cannot be empty");
             }
-            return result;
+            return result.ToString();
          }
       }
+
    }
 }

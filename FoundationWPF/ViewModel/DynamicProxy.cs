@@ -1,4 +1,5 @@
-﻿using FoundationWPF.ExtensionMethods;
+﻿using FoundationData;
+using FoundationWPF.ExtensionMethods;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,7 +8,6 @@ using System.Linq;
 
 namespace FoundationWPF.ViewModel {
 
-   using FoundationData;
    using PropList = List<Tuple<string, string>>;
 
    /// <summary>
@@ -99,20 +99,40 @@ namespace FoundationWPF.ViewModel {
          return true;
       }
 
+      private Dictionary<string, string> errors = new Dictionary<string, string>();
+
+      public bool HasErrors {
+         get { return errors.Count > 0; }
+      }
+
       public string Error {
-         get { throw new NotImplementedException(); }
+         get {
+            return string.Join("\n", errors.Select(e => e.Key + ": " + e.Value + "\n"));
+         }
       }
 
       /// <summary>
       /// Enable the support of IDataErrorInfo on the DynamicProxy
-      /// Since it's a proxy it simply forward the indexer to the model object
+      /// Since it's a proxy it simply forward the indexer call to the model object
       /// </summary>
       string IDataErrorInfo.this[string columnName] {
          get {
             var entity = proxiedObjs.GetFirstWithProperty(columnName);
-            if(entity is FoundationData.IIndexer<string>)
-               return (string)(entity as FoundationData.IIndexer<string>)[columnName];
-            else
+            // check if the entity implements the IDataErrorInfo interface
+            if(entity != null && entity is IDataErrorInfo) {
+               //var err = (string)(entity as IDataErrorInfo)[columnName];
+               return (string)(entity as IDataErrorInfo)[columnName];
+               
+               /*
+               if(!string.IsNullOrEmpty(err)) {
+                  //errors.Add(columnName, err);
+                  return err;
+               }else{
+                  //errors.Remove(columnName);
+                  return null;
+               }
+               */ 
+            } else
                return null;
          }
       }

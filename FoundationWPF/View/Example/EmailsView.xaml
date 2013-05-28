@@ -7,6 +7,7 @@
              d:DesignHeight="400" d:DesignWidth="600">
     
     <DockPanel Background="White">
+        
         <TextBlock DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="10,10" FontSize="12pt">Emails View (PoC)</TextBlock>
 
         <ListBox DockPanel.Dock="Left" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="200" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding CollectionView}">

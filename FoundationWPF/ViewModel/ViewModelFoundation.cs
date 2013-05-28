@@ -7,7 +7,8 @@ using System.Linq;
 namespace FoundationWPF.ViewModel {
 
    /// <summary>
-   /// Simple wrapper class for ViewModelBase of MVVM Light Toolkit
+   /// Wrapper class for ViewModelBase of MVVM Light Toolkit
+   /// with some additional properties
    /// </summary>
    public abstract class ViewModelFoundation : ViewModelBase {
 
