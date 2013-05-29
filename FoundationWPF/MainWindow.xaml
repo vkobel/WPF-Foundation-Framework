@@ -30,7 +30,7 @@
         <!-- Main navigation -->
         <Border DockPanel.Dock="Top" BorderBrush="#AAAAAA" BorderThickness="0,0,0,2" Height="70">
             <ItemsControl ItemsSource="{Binding MainNavig}">
-                
+
                 <!-- Displays buttons horizontally -->
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -40,17 +40,24 @@
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <RadioButton Content="{Binding Name}"
-                                     Width="100"
+
+                        <RadioButton Width="100"
                                      Command="{Binding DataContext.ChangeMainCmd, ElementName=MainWindowApp}"
                                      CommandParameter="{Binding}"
                                      IsChecked="{Binding IsSelected}"
                                      Style="{StaticResource FoundationButton}"
                                      GroupName="MainNavig">
+
+                            <StackPanel>
+                                <Image Height="32" Width="32" Source="{Binding ImgPath}" HorizontalAlignment="Center" />
+                                <TextBlock TextAlignment="Center" Text="{Binding Name}"></TextBlock>
+                            </StackPanel>
+
                             <ToolTipService.ToolTip>
                                 <ToolTip Content="{Binding Description}" />
                             </ToolTipService.ToolTip>
                         </RadioButton >
+
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
