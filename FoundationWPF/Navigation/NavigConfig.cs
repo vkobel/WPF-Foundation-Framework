@@ -10,6 +10,7 @@ namespace FoundationWPF.Navigation {
       public bool Enabled { get; set; }
       public string Description { get; set; }
       public string ImgPath { get; set; }
+      public bool IsSelected { get; set; }
       
       public List<NavigConfig> SubConfig { get; set; }
       public ViewModelFoundation VM { get; set; }

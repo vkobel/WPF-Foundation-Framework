@@ -83,6 +83,12 @@ namespace FoundationWPF.ViewModel {
             if(currentMainNav != value) {
                currentMainNav = value;
                CurrentViewModel = SubNavig[0].VM;
+               
+               // Deselect all subnavigs
+               SubNavig.ForEach(i => i.IsSelected = false);
+               // Select the good one
+               SubNavig[0].IsSelected = true;
+               
                RaisePropertyChanged("CurrentMainNav");
                RaisePropertyChanged("SubNavig");
             }
@@ -137,8 +143,10 @@ namespace FoundationWPF.ViewModel {
          // Load custom navigation informations
          NavigConfigLoader.RegisterConfigurations(navConfs);
 
-         changeMainCmd = new Lazy<ICommand>(() => new RelayCommand<NavigConfig>(nc => CurrentMainNav = nc));
-         changeViewCmd = new Lazy<ICommand>(() => new RelayCommand<ViewModelFoundation>(vm => CurrentViewModel = vm));
+         changeMainCmd = new Lazy<ICommand>(() => 
+            new RelayCommand<NavigConfig>(nc => CurrentMainNav = nc));
+         changeViewCmd = new Lazy<ICommand>(() => 
+            new RelayCommand<ViewModelFoundation>(vm => CurrentViewModel = vm));
       }
 
       /// <summary>
@@ -176,6 +184,8 @@ namespace FoundationWPF.ViewModel {
          }
          CurrentMainNav = MainNavig[0];
          CurrentViewModel = SubNavig[0].VM;
+         CurrentMainNav.IsSelected = true;
+         SubNavig[0].IsSelected = true;
       }
 
       #region Commands

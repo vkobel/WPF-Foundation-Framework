@@ -7,6 +7,7 @@
         Name="MainWindowApp"
         DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
 
+    <!-- Links between ViewModels and Views -->
     <Window.Resources>
         <DataTemplate DataType="{x:Type vm:AuthenticationViewModel}">
             <v:AuthenticationView />
@@ -14,7 +15,8 @@
         <DataTemplate DataType="{x:Type vm:LoadingViewModel}">
             <v:LoadingView />
         </DataTemplate>
-        
+
+        <!-- Register of ViewModels -->
         <DataTemplate DataType="{x:Type vm:HelloViewModel}">
             <v:HelloView />
         </DataTemplate>
@@ -24,37 +26,60 @@
     </Window.Resources>
 
     <DockPanel LastChildFill="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+
+        <!-- Main navigation -->
         <Border DockPanel.Dock="Top" BorderBrush="#AAAAAA" BorderThickness="0,0,0,2" Height="70">
             <ItemsControl ItemsSource="{Binding MainNavig}">
+                
+                <!-- Displays buttons horizontally -->
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Width="200" 
-                                Content="{Binding Name}"
-                                Command="{Binding DataContext.ChangeMainCmd, ElementName=MainWindowApp}"
-                                CommandParameter="{Binding}"
-                                IsEnabled="{Binding Enabled}"
-                                Margin="2,5" />
+                        <RadioButton Content="{Binding Name}"
+                                     Width="100"
+                                     Command="{Binding DataContext.ChangeMainCmd, ElementName=MainWindowApp}"
+                                     CommandParameter="{Binding}"
+                                     IsChecked="{Binding IsSelected}"
+                                     Style="{StaticResource FoundationButton}"
+                                     GroupName="MainNavig">
+                            <ToolTipService.ToolTip>
+                                <ToolTip Content="{Binding Description}" />
+                            </ToolTipService.ToolTip>
+                        </RadioButton >
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Border>
 
+        <!-- Sub navigation -->
         <Border DockPanel.Dock="Left" BorderBrush="#AAAAAA" BorderThickness="0,0,2,0" Width="100">
             <ItemsControl ItemsSource="{Binding SubNavig}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Button Width="70" 
-                                Content="{Binding Name}"
-                                Command="{Binding DataContext.ChangeViewCmd, ElementName=MainWindowApp}"
-                                CommandParameter="{Binding VM}"
-                                Margin="2,5" />
+                        <RadioButton Content="{Binding Name}"
+                                     Width="70"
+                                     Command="{Binding DataContext.ChangeViewCmd, ElementName=MainWindowApp}"
+                                     CommandParameter="{Binding VM}"
+                                     IsChecked="{Binding IsSelected}"
+                                     Style="{StaticResource FoundationButton}"
+                                     GroupName="SubNavig">
+                            <ToolTipService.ToolTip>
+                                <ToolTip Content="{Binding Description}" />
+                            </ToolTipService.ToolTip>
+                        </RadioButton >
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </Border>
 
+        <!-- Content (ViewModel) placeholder -->
         <ContentControl Content="{Binding CurrentViewModel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="605" />
-        
+
     </DockPanel>
 </Window>
     
