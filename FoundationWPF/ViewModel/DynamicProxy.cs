@@ -37,6 +37,9 @@ namespace FoundationWPF.ViewModel {
       // format: <real, dependency>
       private PropList propDependencies;
 
+      // caching for reading properties through reflection
+      private Dictionary<string, object> readCache = new Dictionary<string, object>();
+
       /// <summary>
       /// Subscribe to this to know when a property has changed into the proxy.
       /// </summary>
@@ -71,14 +74,14 @@ namespace FoundationWPF.ViewModel {
       /// <param name="dependsOn">Any number of string the paramerter depends on</param>
       public void RegisterPropertyDependency(string propName, params string[] dependsOn) {
          foreach(var p in dependsOn)
-            propDependencies.Add(new Tuple<string,string>(p, propName));
+            propDependencies.Add(new Tuple<string, string>(p, propName));
       }
-      
+
       /// <summary>
       /// Called when a member (property) is called
       /// </summary>
       public override bool TryGetMember(GetMemberBinder binder, out object result) {
-         result = proxiedObjs.GetFirstMatchingPropertyValue(binder.Name);
+         result = GetProxiedProperty(binder.Name);
          return result != null;
       }
 
@@ -90,17 +93,38 @@ namespace FoundationWPF.ViewModel {
                                                                                       proxiedObjs.GetFirstWithProperty(binder.Name),
                                                                                       proxiedObjs.GetFirstMatchingPropertyValue(binder.Name),
                                                                                       value));
-         if(modificationAllowed)
-            proxiedObjs.SetFirstMatchingPropertyValue(binder.Name, value);
-         
-         //
+         if(modificationAllowed) {
+            SetProxiedProperty(binder.Name, value);                        // set the cached property to a new value (UI only)
+            proxiedObjs.SetFirstMatchingPropertyValue(binder.Name, value); // set the real property into the db
+         }
 
          PropertyChanged(this, new PropertyChangedEventArgs(binder.Name));
-         
+
          // Raise dependency properties notifications
          foreach(var prop in propDependencies.Where(p => p.Item1 == binder.Name))
             PropertyChanged(this, new PropertyChangedEventArgs(prop.Item2));
          return true;
+      }
+
+      /// <summary>
+      /// Get the proxied property through reflection, or if it has already
+      /// been accessed, retrieve it from the cache
+      /// </summary>
+      /// <param name="name">The property to get the value from</param>
+      /// <returns>The value of the specified property</returns>
+      private object GetProxiedProperty(string name) {
+         if(!readCache.ContainsKey(name))
+            readCache.Add(name, proxiedObjs.GetFirstMatchingPropertyValue(name));
+         return readCache[name];
+      }
+
+      /// <summary>
+      /// Set the property of the cache to another value (UI only)
+      /// </summary>
+      /// <param name="name">The name of the property to set</param>
+      /// <param name="value">The new value to assign to the property</param>
+      private void SetProxiedProperty(string name, object value) {
+         readCache[name] = value;
       }
 
       /// <summary>

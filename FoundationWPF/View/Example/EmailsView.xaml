@@ -35,7 +35,7 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock Text="{Binding Path=Email1}" />
+                                <TextBlock Text="{Binding Email1}" />
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
