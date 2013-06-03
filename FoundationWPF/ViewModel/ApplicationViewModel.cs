@@ -141,7 +141,7 @@ namespace FoundationWPF.ViewModel {
          loadingViewModel = loadingVm;
 
          // Load custom navigation informations
-         NavigConfigLoader.RegisterConfigurations(navConfs);
+         NavigAttribute.RegisterConfigurations(navConfs);
 
          changeMainCmd = new Lazy<ICommand>(() => 
             new RelayCommand<NavigConfig>(nc => CurrentMainNav = nc));

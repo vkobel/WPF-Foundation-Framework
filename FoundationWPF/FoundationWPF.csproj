@@ -98,7 +98,6 @@
     <Compile Include="Navigation\Example\NavigSample.cs" />
     <Compile Include="Navigation\NavigConfig.cs" />
     <Compile Include="Navigation\NavigAttribute.cs" />
-    <Compile Include="Navigation\NavigConfigLoader.cs" />
     <Compile Include="DI\Modules\ViewModelsModule.cs" />
     <Compile Include="DI\Modules\RepositoriesModule.cs" />
     <Compile Include="DI\Modules\SecurityModule.cs" />
