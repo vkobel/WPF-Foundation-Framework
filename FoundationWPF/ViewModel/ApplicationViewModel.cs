@@ -53,29 +53,6 @@ namespace FoundationWPF.ViewModel {
          }
       }
 
-      /// <summary>
-      /// Sets the view as a loading one and execute asynchronously the PreLoad method of IPreLoadable.
-      /// Once loaded, it replaces the loading view by the freshly loaded ViewModel
-      /// </summary>
-      /// <param name="vm"></param>
-      private async void AsyncLoadViewModel(IPreLoadable vm) {
-         vm.IsPreLoadNeeded = false;             // This ViewModel doesn't need loading anymore
-         nowLoadingViewModel = currentViewModel; // Set the currently loading ViewModel
-         currentViewModel = loadingViewModel;    // Display the loading view
-
-         vm.IsCurrentlyLoading = true;
-         await Task.Factory.StartNew(vm.PreLoad); // Launch the preloading in another task
-         vm.IsCurrentlyLoading = false;
-
-         // Check if the view is a ILoadingViewModel and if it's currently in a loading state
-         if(nowLoadingViewModel != null && !(nowLoadingViewModel as IPreLoadable).IsCurrentlyLoading) {
-            currentViewModel = nowLoadingViewModel; // Replace the loading by the freshly loaded ViewModel
-            nowLoadingViewModel = null;
-            RaiseViewModelDisplayed(currentViewModel);
-            RaisePropertyChanged("CurrentViewModel");
-         }
-      }
-
       // Currently selected main navig
       public NavigConfig CurrentMainNav {
          get { return currentMainNav; } 
@@ -150,10 +127,33 @@ namespace FoundationWPF.ViewModel {
       }
 
       /// <summary>
+      /// Sets the view as a loading one and execute asynchronously the PreLoad method of IPreLoadable.
+      /// Once loaded, it replaces the loading view by the freshly loaded ViewModel
+      /// </summary>
+      /// <param name="vm"></param>
+      private async void AsyncLoadViewModel(IPreLoadable vm) {
+         vm.IsPreLoadNeeded = false;             // This ViewModel doesn't need loading anymore
+         nowLoadingViewModel = currentViewModel; // Set the currently loading ViewModel
+         currentViewModel = loadingViewModel;    // Display the loading view
+
+         vm.IsCurrentlyLoading = true;
+         await Task.Factory.StartNew(vm.PreLoad); // Launch the preloading in another task
+         vm.IsCurrentlyLoading = false;
+
+         // Check if the view is a ILoadingViewModel and if it's currently in a loading state
+         if(nowLoadingViewModel != null && !(nowLoadingViewModel as IPreLoadable).IsCurrentlyLoading) {
+            currentViewModel = nowLoadingViewModel; // Replace the loading by the freshly loaded ViewModel
+            nowLoadingViewModel = null;
+            RaiseViewModelDisplayed(currentViewModel);
+            RaisePropertyChanged("CurrentViewModel");
+         }
+      }
+
+      /// <summary>
       /// Create the navigation structure containing all ViewModels
       /// </summary>
       /// <param name="mainViewModels">An array of the application's ViewModels</param>
-      public void LoadNavigation(ViewModelFoundation[] mainViewModels) {
+      private void LoadNavigation(ViewModelFoundation[] mainViewModels) {
 
          // Browse every ViewModels and search if it has a Navig attribute
          foreach(var vm in mainViewModels) {

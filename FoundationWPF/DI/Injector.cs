@@ -13,7 +13,7 @@ namespace FoundationWPF.DI {
       protected IKernel Kernel { get; private set; }
 
       private Injector() {
-         Kernel = new StandardKernel(new NinjectSettings { AllowNullInjection = true });
+         Kernel = new StandardKernel();
       }
 
       public void LoadModules(params NinjectModule[] modules) {
