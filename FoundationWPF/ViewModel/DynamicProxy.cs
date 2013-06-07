@@ -147,6 +147,7 @@ namespace FoundationWPF.ViewModel {
          return propDependencies.Exists(p => p.Item2 == prop);
       }
 
+      // Unused property, necessary to implement the IDataErrorInfo interface
       public string Error {
          get { throw new NotImplementedException(); }
       }
