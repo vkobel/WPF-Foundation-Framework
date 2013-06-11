@@ -1,7 +1,6 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System;
 
 namespace FoundationWPF.Security {
 

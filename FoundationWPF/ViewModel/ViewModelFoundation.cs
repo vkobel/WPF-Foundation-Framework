@@ -12,7 +12,7 @@ namespace FoundationWPF.ViewModel {
    /// </summary>
    public abstract class ViewModelFoundation : ViewModelBase {
 
-      public SecurityObject CurrentUser { get; private set; }
+      protected SecurityObject CurrentUser { get; private set; }
       public event EventHandler ViewModelDisplayed;
 
       public ViewModelFoundation(){

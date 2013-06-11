@@ -4,6 +4,10 @@ using FoundationWPF.ViewModel;
 
 namespace FoundationWPF.Navigation {
 
+   /// <summary>
+   /// Contains additional information about the navigation attributes.
+   /// The Name property must match the name of the paramerter of the NavigAttribute
+   /// </summary>
    public class NavigConfig {
       public string Name { get; set; }
       public int Position { get; set; }

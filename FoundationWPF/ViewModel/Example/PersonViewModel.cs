@@ -12,9 +12,8 @@ namespace FoundationWPF.ViewModel {
       public string Fullname { get { return BindingData.Firstname + " " + BindingData.Lastname; } }
 
       public PersonViewModel(Person p) : base(p) {
-         var proxy = BindingData as DynamicProxy; // simple cast to enable intellisense on the dynamic object (and compile-time verification)
-         proxy.Register(this);
-         proxy.RegisterPropertyDependency("Fullname", "Firstname", "Lastname");
+         bindingData.Register(this);
+         bindingData.RegisterPropertyDependency("Fullname", "Firstname", "Lastname");
       }
    }
 

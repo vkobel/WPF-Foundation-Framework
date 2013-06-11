@@ -4,25 +4,32 @@ using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace FoundationData.GenericRepo {
+
    /// <summary>
-   /// Build a repository for a specified POCO class and a DbContext
+   /// Build a repository for a specified POCO class (using a DbContext)
    /// </summary>
-   /// <typeparam name="T">The entity to be accessed, must be present in the DbContext</typeparam>
-   public class Repository<T> : IRepository<T> where T: class {
-      
+   /// <typeparam name="T">The type of entity that the repository will hold, must be present in the DbContext</typeparam>
+   public class Repository<T> : IRepository<T> where T : class {
+
+      /// <summary>
+      /// The DbContext that holds the database
+      /// </summary>
       private DbContext ctx;
-      
+
+      /// <summary>
+      /// The set that holds the current entities
+      /// </summary>
       protected DbSet<T> entities {
-         get; set;
+         get;
+         set;
       }
 
       public Repository(DbContext ctx) {
          this.ctx = ctx;
 
-         /// Get the matching DbSet by searching the properties of the context
+         /// Get the matching DbSet by searching the context's properties
          entities = ctx.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public)
                                  .Single(p => p.PropertyType == typeof(DbSet<T>))
                                  .GetValue(ctx) as DbSet<T>;
@@ -74,13 +81,6 @@ namespace FoundationData.GenericRepo {
 
       public int Persist() {
          return ctx.SaveChanges();
-      }
-
-      public Task<int> AsyncPersist() {
-         
-         // TODO: set a timeout, what if the user closes the app while saving ?
-
-         return Task.Factory.StartNew<int>(() => Persist(), TaskCreationOptions.PreferFairness);
       }
 
       #endregion

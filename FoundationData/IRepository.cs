@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace FoundationData.GenericRepo {
 
+   /// <summary>
+   /// Specify all the necessary methods of a Repository pattern
+   /// </summary>
+   /// <typeparam name="T">The type of entity that the repository will hold</typeparam>
    public interface IRepository<T> : IDisposable where T : class {
 
       /// <summary>
@@ -36,16 +40,28 @@ namespace FoundationData.GenericRepo {
       /// <returns>The updated property form the entity</returns>
       object GetReloadedProperty(T entity, string property);
 
+      /// <summary>
+      /// Add the specified entity to the set and persist immediately the database
+      /// </summary>
+      /// <param name="entity">The entity to insert in the database</param>
       void Create(T entity);
+
+      /// <summary>
+      /// Add the specified entity to the set without persiting it
+      /// </summary>
+      /// <param name="entity">The entity to insert in the set</param>
       void Add(T entity);
+
+      /// <summary>
+      /// Deletes the specified entity in the set
+      /// </summary>
+      /// <param name="entity">The entity to delete</param>
       void Delete(T entity);
 
       /// <summary>
       /// Save all the changes into the database
       /// </summary>
+      /// <returns>The number of objects written to the underlying database</returns>
       int Persist();
-      
-      Task<int> AsyncPersist();
-
    }
 }

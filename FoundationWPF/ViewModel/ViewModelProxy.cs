@@ -24,7 +24,7 @@ namespace FoundationWPF.ViewModel {
       /// <summary>
       /// Simple typed alias for the dynamic object BindingData
       /// </summary>
-      private DynamicProxy bindingData;
+      protected DynamicProxy bindingData;
 
       public ViewModelProxy(TEntity entity) : base() {
          this.repo = Injector.I.Get<IRepository<TEntity>>();
@@ -40,15 +40,16 @@ namespace FoundationWPF.ViewModel {
       /// <returns>true, if the value will be replaced by the user's one. False if the database value wins</returns>
       private bool ViewModelProxy_PropertyChanging(object sender, FoundationPropertyChangingEventArgs e) {
 
-         if(e.OldValue != e.NewValue){ // if the value has been update
+         if(e.OldValue != e.NewValue){ // if the value has been updated
             var updatedValue = repo.GetReloadedProperty(e.Entity as TEntity, e.PropertyName);
 
             if(!e.OldValue.Equals(updatedValue) && !e.NewValue.Equals(updatedValue)) {
                string msg = string.Format("This field has a more recent value: '{0}'\nDo you want to replace this value ({0}) by yours ({1}) ?", updatedValue, e.NewValue);
                return DialogResult.Yes == MessageBox.Show(msg, "Recent update notification", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-            }
+            } else
+               return true;
          }
-         return true;
+         return false;
       }
 
       // Alert the ViewModelFoundation if a property has changed and persist the data

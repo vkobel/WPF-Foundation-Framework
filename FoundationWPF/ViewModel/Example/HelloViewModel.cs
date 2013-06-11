@@ -7,7 +7,7 @@ namespace FoundationWPF.ViewModel {
    [Navig("HR", "World")]
    //[Auth("TheMan")]
    public class HelloViewModel : ViewModelFoundation { // , IPreLoadable { 
-
+      
       public string Name { get; set; }
 
       public HelloViewModel() {
