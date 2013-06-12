@@ -5,10 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoundationWPF", "Foundation
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoundationData", "FoundationData\FoundationData.csproj", "{D710363D-C265-485D-A4EC-AE8C2919D998}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoundationWPFLibrary", "FoundationWPFLibrary\FoundationWPFLibrary.csproj", "{88273372-E0A6-4237-96E0-15289E37CC71}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test_nuget8", "test_nuget8\test_nuget8.csproj", "{D06ED895-707A-4F32-82B8-388423CBF72B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,14 +19,6 @@ Global
 		{D710363D-C265-485D-A4EC-AE8C2919D998}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D710363D-C265-485D-A4EC-AE8C2919D998}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D710363D-C265-485D-A4EC-AE8C2919D998}.Release|Any CPU.Build.0 = Release|Any CPU
-		{88273372-E0A6-4237-96E0-15289E37CC71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{88273372-E0A6-4237-96E0-15289E37CC71}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{88273372-E0A6-4237-96E0-15289E37CC71}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{88273372-E0A6-4237-96E0-15289E37CC71}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D06ED895-707A-4F32-82B8-388423CBF72B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D06ED895-707A-4F32-82B8-388423CBF72B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D06ED895-707A-4F32-82B8-388423CBF72B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D06ED895-707A-4F32-82B8-388423CBF72B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
