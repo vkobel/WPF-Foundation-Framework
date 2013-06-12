@@ -19,9 +19,9 @@ namespace FoundationWPF.ViewModel {
                                                                     where TEntity : class 
                                                                     where TViewModel : ViewModelProxy<TEntity> {
       private IEnumerable<TEntity> entites;
-      private IRepository<TEntity> repo { get; set; }
+      protected IRepository<TEntity> Repo { get; set; }
       private Lazy<ICollectionView> collectionView;
-      protected ObservableCollection<TViewModel> all { get; set; }
+      protected ObservableCollection<TViewModel> All { get; set; }
 
       /// <summary>
       /// Exposes all the entites as a ICollectionView, it is a lazy loaded property
@@ -35,16 +35,16 @@ namespace FoundationWPF.ViewModel {
       /// Filter(predicate) method to apply a filter.
       /// </summary>
       public ViewModelCollection() : base() {
-         all = new ObservableCollection<TViewModel>();
-         repo = Injector.I.Get<IRepository<TEntity>>();
-         entites = repo.GetAllAsEnumerable(); // lazy loaded
+         All = new ObservableCollection<TViewModel>();
+         Repo = Injector.I.Get<IRepository<TEntity>>();
+         entites = Repo.GetAllAsEnumerable(); // lazy loaded
          IsPreLoadNeeded = true;
 
          // Lazy initialization of the collection view (real loading)
          collectionView = new Lazy<ICollectionView>(() => {
             foreach(var ent in entites) // real loading of entites (previously lazily loaded)
-               all.Add(Activator.CreateInstance(typeof(TViewModel), ent) as TViewModel);
-            return CollectionViewSource.GetDefaultView(all);
+               All.Add(Activator.CreateInstance(typeof(TViewModel), ent) as TViewModel);
+            return CollectionViewSource.GetDefaultView(All);
          });
       }
 
@@ -53,7 +53,7 @@ namespace FoundationWPF.ViewModel {
       /// </summary>
       /// <param name="predicate">The predicate to filter the entites collection, null to select all entites.</param>
       public void Filter(Expression<Func<TEntity, bool>> predicate) {
-         entites = predicate != null ? repo.Query(predicate) : repo.GetAllAsEnumerable();
+         entites = predicate != null ? Repo.Query(predicate) : Repo.GetAllAsEnumerable();
       }
 
       #region IPreLoadable stuff
